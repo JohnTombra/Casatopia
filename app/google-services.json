@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1021828015019",
+    "project_id": "casatopia-c2993",
+    "storage_bucket": "casatopia-c2993.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1021828015019:android:c1006a9aa788e8d3a5a8ee",
+        "android_client_info": {
+          "package_name": "com.tombra.casatopia"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1021828015019-fv6skobou1tfsjfc3hrh802e9ii975r4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBG8ID6nVy-KMcGnG2YXQdpfI6vyXGatSI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1021828015019-fv6skobou1tfsjfc3hrh802e9ii975r4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

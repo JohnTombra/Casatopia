@@ -1,0 +1,498 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".user_side.activities.MyProperty">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_height="wrap_content">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="25dp"
+                android:layout_marginLeft="8dp"
+                android:id="@+id/logo"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/round_arrow_back_24"
+                app:layout_constraintTop_toTopOf="parent"
+
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_height="25dp"/>
+
+
+            <TextView
+                app:layout_constraintLeft_toRightOf="@+id/logo"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="6dp"
+                android:textColor="#444444"
+                android:layout_marginTop="20dp"
+                android:id="@+id/propertyDetails"
+                android:fontFamily="sans-serif"
+                android:textStyle="bold"
+                android:textSize="19dp"
+                android:layout_height="wrap_content"
+                android:text="My Property"/>
+
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                app:layout_constraintTop_toBottomOf="@+id/propertyDetails"
+                app:cardCornerRadius="10dp"
+                android:id="@+id/mainContainer"
+                android:layout_marginLeft="5dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="25dp"
+                app:cardBackgroundColor="#F7F9FF"
+                android:layout_height="425dp"
+                >
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        app:cardCornerRadius="8dp"
+                        android:elevation="-1dp"
+                        android:layout_marginRight="5dp"
+                        android:id="@+id/imageCont"
+                        android:layout_marginLeft="5dp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_marginTop="5dp"
+                        app:cardElevation="-1dp"
+                        android:layout_height="wrap_content">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="match_parent"
+                            android:background="#222222"
+                            android:id="@+id/image"
+                            android:scaleType="center"
+                            android:src="@drawable/ship"
+                            android:layout_height="300dp"/>
+
+                    </androidx.cardview.widget.CardView>
+                    <TextView
+                        android:layout_width="250dp"
+                        android:layout_marginTop="12dp"
+                        android:textSize="16dp"
+                        android:layout_marginLeft="5dp"
+                        android:textColor="#222222"
+                        android:textStyle="bold"
+                        android:layout_height="wrap_content"
+                        android:text="Great White Double Height House"
+                        app:layout_constraintLeft_toLeftOf="@id/imageCont"
+                        app:layout_constraintTop_toBottomOf="@+id/imageCont"
+                        android:id="@+id/name"/>
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:textSize="15dp"
+                        android:layout_height="wrap_content"
+                        tools:text="10000"
+                        android:textStyle="bold"
+                        android:layout_marginRight="10dp"
+                        android:textColor="#666666"
+                        app:layout_constraintRight_toRightOf="@id/imageCont"
+                        app:layout_constraintBottom_toBottomOf="@+id/name"
+                        app:layout_constraintTop_toTopOf="@+id/name"
+                        android:id="@+id/price"/>
+
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="wrap_content"
+                        android:layout_marginTop="10dp"
+                        app:cardBackgroundColor="#FFC107"
+                        app:cardCornerRadius="10dp"
+                        android:visibility="gone"
+                        app:cardElevation="-1dp"
+                        app:layout_constraintRight_toRightOf="@+id/price"
+                        app:layout_constraintBottom_toBottomOf="@+id/address"
+                        app:layout_constraintTop_toBottomOf="@+id/price"
+                        android:layout_height="wrap_content">
+
+
+
+                    </androidx.cardview.widget.CardView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:textSize="12dp"
+                        android:textColor="#666666"
+                        app:layout_constraintTop_toBottomOf="@+id/name"
+                        android:layout_height="wrap_content"
+                        android:text="3891 Ranchview Dr.Richardson, California"
+                        app:layout_constraintLeft_toLeftOf="@id/name"
+                        android:id="@+id/address"/>
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="20dp"
+                        android:id="@+id/other"
+                        android:layout_marginRight="10dp"
+                        android:orientation="horizontal"
+                        app:layout_constraintLeft_toLeftOf="@+id/address"
+                        app:layout_constraintRight_toRightOf="@+id/address"
+                        app:layout_constraintTop_toBottomOf="@+id/address">
+
+                        <TextView
+                            android:id="@+id/bedrooms"
+                            android:layout_width="0dp"
+                            android:paddingLeft="10dp"
+                            android:textStyle="bold"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="3 Bedroom"
+                            android:textSize="13sp" />
+
+                        <TextView
+                            android:id="@+id/area"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:textStyle="bold"
+                            android:text="4,120 SQRT"
+                            android:textSize="13sp" />
+
+                        <TextView
+                            android:id="@+id/bathrooms"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="2 bathsrooms"
+                            android:gravity="center"
+                            android:textStyle="bold"
+                            android:textSize="13sp" />
+
+                        <TextView
+                            android:id="@+id/garage"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="right"
+                            android:paddingRight="10dp"
+                            android:textStyle="bold"
+                            android:text="1 garage"
+                            android:textSize="13sp" />
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </androidx.cardview.widget.CardView>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:layout_constraintTop_toBottomOf="@+id/mainContainer">
+
+                <RatingBar
+                    android:id="@+id/rating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="-25dp"
+                    android:isIndicator="true"
+                    android:scaleX="0.7"
+                    android:visibility="gone"
+                    android:scaleY="0.7"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:gravity="right"
+                    android:layout_marginRight="0dp"
+                    android:layout_marginTop="35dp"
+                    app:layout_constraintTop_toBottomOf="@+id/other"
+                    android:id="@+id/linear"
+                    android:layout_height="wrap_content">
+
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="90dp"
+                        android:layout_height="40dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginRight="15dp"
+                        app:cardBackgroundColor="#00bbff"
+                        app:cardCornerRadius="20dp"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/rating">
+
+                        <TextView
+                            android:id="@+id/mappp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="Map"
+                            android:textColor="#ffffff"
+
+                            android:textSize="15dp"
+                            android:textStyle="bold" />
+
+
+                    </androidx.cardview.widget.CardView>
+
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="130dp"
+                        android:layout_height="40dp"
+                        android:layout_marginRight="15dp"
+                        app:cardBackgroundColor="#00bbff"
+                        app:cardCornerRadius="20dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/rating"
+                        app:layout_constraintTop_toTopOf="@+id/rating">
+
+                        <TextView
+                            android:id="@+id/complaint"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="Give Complaint"
+                            android:textColor="#ffffff"
+                            android:textSize="15dp"
+                            android:textStyle="bold" />
+
+
+                    </androidx.cardview.widget.CardView>
+
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="90dp"
+                        android:layout_height="40dp"
+                        android:layout_marginRight="10dp"
+                        app:cardBackgroundColor="#00bbff"
+                        app:cardCornerRadius="20dp"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/rating">
+
+                        <TextView
+                            android:id="@+id/ownerProfile"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="Agent"
+                            android:textColor="#ffffff"
+                            android:textStyle="bold"
+                            android:textSize="15dp" />
+
+
+                    </androidx.cardview.widget.CardView>
+
+
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="5dp"
+                    app:layout_constraintTop_toBottomOf="@+id/linear"
+                    android:orientation="vertical">
+
+
+                    <TextView
+                        android:id="@+id/owner"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:visibility="gone"
+                        android:text="" />
+
+
+                    <TextView
+                        android:id="@+id/type"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:text="Available for: rent" />
+
+
+
+                    <TextView
+                        android:id="@+id/duration"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="5dp"
+                        android:text="Duration: loading" />
+
+
+                    <TextView
+                        android:id="@+id/country"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="5dp"
+                        android:text="Country: Nigeria" />
+
+
+                    <TextView
+                        android:id="@+id/state"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="5dp"
+                        android:text="State: FCT, Abuja" />
+
+
+                    <TextView
+                        android:id="@+id/city"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="5dp"
+                        android:text="City: Kubwa" />
+
+
+                    <RatingBar
+                        android:id="@+id/rating2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="-3dp"
+                        android:layout_gravity="center"
+                        android:scaleX="0.6"
+                        android:scaleY="0.6"
+                        android:isIndicator="true"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="10dp"
+                        app:cardCornerRadius="20dp"
+                        android:layout_marginTop="15dp"
+                        app:cardBackgroundColor="#4CAF50"
+                        android:layout_marginRight="10dp"
+                        android:layout_height="55dp">
+
+
+                        <TextView
+                            android:id="@+id/ownershipDocument"
+                            android:layout_gravity="center"
+                            android:textSize="19dp"
+                            android:textColor="#444444"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Print ownership document"/>
+
+
+                    </androidx.cardview.widget.CardView>
+                </LinearLayout>
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="500dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="100dp"
+                        android:orientation="vertical"
+                        app:layout_constraintTop_toTopOf="parent">
+
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:layout_weight="1"
+                                android:text="Map View"
+                                android:visibility="gone"
+                                android:textColor="#222222"
+                                android:textSize="16dp"
+                                android:textStyle="bold" />
+
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:id="@+id/viewFullMap"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="right"
+                                android:layout_marginLeft="5dp"
+                                android:visibility="gone"
+                                android:layout_marginRight="10dp"
+                                android:src="@drawable/baseline_arrow_forward_24"
+                                android:textSize="11dp" />
+
+
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/mapCont"
+                            android:visibility="gone"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="12dp"
+                            android:layout_marginRight="5dp"
+                            android:elevation="-1dp"
+                            app:cardCornerRadius="8dp"
+                            app:cardElevation="-1dp"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:id="@+id/map"
+                                android:layout_width="match_parent"
+                                android:layout_height="230dp"
+                                android:background="#F3F3F3"
+                                android:scaleType="center" />
+
+                            <fragment
+                                android:id="@+id/map2"
+                                android:name="com.google.android.gms.maps.SupportMapFragment"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                tools:context=".user_side.activities.FullMap"
+                                tools:layout="@layout/activity_complaint" />
+
+                        </androidx.cardview.widget.CardView>
+
+
+                    </LinearLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Casatopia</string>
+    <string name="title_activity_full_map_screen">FullMapScreen</string>
+    <string name="title_activity_maps">MapsActivity</string>
+</resources>

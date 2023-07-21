@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/userHome2">
+
+    <fragment
+        android:id="@+id/userHome2"
+        android:name="com.tombra.casatopia.user_side.activities.UserHome"
+        android:label="activity_user_home"
+        tools:layout="@layout/activity_user_home" >
+        <action
+            android:id="@+id/action_userHome2_to_myChats"
+            app:destination="@id/myChats" />
+        <action
+            android:id="@+id/action_userHome2_to_myProperties"
+            app:destination="@id/myProperties" />
+        <action
+            android:id="@+id/action_userHome2_to_profile2"
+            app:destination="@id/profile2" />
+    </fragment>
+    <fragment
+        android:id="@+id/myChats"
+        android:name="com.tombra.casatopia.user_side.activities.MyChats"
+        android:label="activity_my_chats"
+        tools:layout="@layout/activity_my_chats" >
+        <action
+            android:id="@+id/action_myChats_to_myProperties"
+            app:destination="@id/myProperties" />
+        <action
+            android:id="@+id/action_myChats_to_userHome2"
+            app:destination="@id/userHome2" />
+        <action
+            android:id="@+id/action_myChats_to_myProperties2"
+            app:destination="@id/myProperties" />
+    </fragment>
+    <fragment
+        android:id="@+id/myProperties"
+        android:name="com.tombra.casatopia.user_side.activities.MyProperties"
+        android:label="activity_my_properties"
+        tools:layout="@layout/activity_my_properties" >
+        <action
+            android:id="@+id/action_myProperties_to_myChats"
+            app:destination="@id/myChats" />
+        <action
+            android:id="@+id/action_myProperties_to_userHome2"
+            app:destination="@id/userHome2" />
+    </fragment>
+    <fragment
+        android:id="@+id/profile2"
+        android:name="com.tombra.casatopia.user_side.activities.Profile"
+        android:label="activity_profile"
+        tools:layout="@layout/activity_profile" /><action android:id="@+id/action_global_profile2" app:destination="@id/profile2"/><action android:id="@+id/action_global_myChats" app:destination="@id/myChats"/><action android:id="@+id/action_global_userHome2" app:destination="@id/userHome2"/><action android:id="@+id/action_global_myProperties" app:destination="@id/myProperties"/>
+</navigation>
