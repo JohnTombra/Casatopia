@@ -6,6 +6,8 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -17,34 +19,73 @@
         android:theme="@style/Theme.Casatopia"
         tools:targetApi="31">
         <activity
-            android:name=".AUTHENTICATION_ACCOUNT_TYPE_SCREEN"
+            android:name=".AdminNotifications"
             android:exported="false" />
         <activity
-            android:name=".AUTHENTICATION_VERIFY_SCREEN"
+            android:name=".AdminProfile"
             android:exported="false" />
         <activity
-            android:name=".AUTHENTICATION_WELCOME_SCREEN"
+            android:name=".AdminDashboard"
             android:exported="false" />
+        <activity
+            android:name=".ClientProfile"
+            android:exported="false" />
+        <activity
+            android:name=".user_side.activities.AUTHENTICATION_ACCOUNT_TYPE_SCREEN"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".user_side.activities.AUTHENTICATION_LOGIN"
+            android:exported="true" >
+
+        </activity>
+        <activity
+            android:name=".user_side.activities.AUTHENTICATION_SIGNUP"
+            android:exported="true">
+
+        </activity>
         <activity
             android:name=".MyProperty"
             android:exported="false" />
         <activity
-            android:name=".MyHome"
-            android:exported="false" />
+            android:name=".admin_side.activities.MyHome"
+            android:exported="true">
+
+        </activity>
         <activity
             android:name=".user_side.activities.MyHome"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            android:exported="true" >
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
+
         </activity>
+        <activity
+            android:name=".admin_side.activities.ChatWithClient"
+            android:exported="false" />
+        <activity
+            android:name=".admin_side.activities.ClientProfile"
+            android:exported="false" />
+        <activity
+            android:name=".admin_side.activities.AdminNotifications"
+            android:exported="false" />
         <activity
             android:name=".MyChats"
             android:exported="false" />
         <activity
             android:name=".user_side.activities.MyProperty"
+            android:exported="false" />
+        <activity
+            android:name=".admin_side.activities.AdminProfile"
+            android:exported="false" />
+        <activity
+            android:name=".admin_side.activities.AdminDashboard"
+            android:exported="false" />
+        <activity
+            android:name=".admin_side.activities.AdminTransactionDetail"
             android:exported="false" />
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
@@ -59,7 +100,7 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="YOUR_API_KEY" />
+            android:value="AIzaSyB_JBmO70RonaNpAzG-86DCzKEZPGFIyrc" />
 
         <activity
             android:name=".MapsActivity"
@@ -70,7 +111,11 @@
             android:exported="false" />
         <activity
             android:name=".user_side.activities.UserHome"
-            android:exported="true" />
+            android:exported="true" >
+
+
+
+        </activity>
         <activity
             android:name=".AdminPropertyDetail"
             android:exported="false" />

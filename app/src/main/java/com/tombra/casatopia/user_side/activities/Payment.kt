@@ -6,10 +6,7 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import co.paystack.android.Paystack
 import co.paystack.android.PaystackSdk
@@ -61,12 +58,12 @@ class Payment : AppCompatActivity() {
         PaystackSdk.setPublicKey("pk_test_08a0aa8cb1c30848998ace5747cc8bfdee18ff16")//set proper test or live key here
 
 
-        val confirmButton = findViewById<Button>(R.id.confirmPayment)
+        val confirmButton = findViewById<TextView>(R.id.confirmPayment)
 
         val estateName = findViewById<TextView>(R.id.propertyName)
         val estateImage = findViewById<ImageView>(R.id.propertyImage)
 
-
+        val propertyImage = findViewById<ImageView>(R.id.propertyImage)
 
 
         durationText.addTextChangedListener(object : TextWatcher {
@@ -75,31 +72,44 @@ class Payment : AppCompatActivity() {
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
 
                 if(durationText.text.toString().isBlank()){
-                    totalPriceText.text = estatePrice.toString()
+                    totalPriceText.text = "Total Price:  ${estatePrice.toString().replace(",","")}"
                     return
                 }
 
                 totalPriceText.text =
-                    (estatePrice * Integer.parseInt(durationText.text.toString())).toString()
+                    "Total Price:  ${(estatePrice * Integer.parseInt(durationText.text.toString())).toString()}"
             }
         })
 
         userDatabase.getSingleEstate(estateId) { estateFromRepository ->
-            totalPriceText.text = estateFromRepository.price.toString()
+            totalPriceText.text = "Total Price:  ${estateFromRepository.price.toString().replace(",","")}"
             estateName.text = estateFromRepository.estateName
             estatePrice = estateFromRepository.price!!.replace(",","").toInt()
-            priceText.text = estatePrice.toString()
+            priceText.text = "Price per year: ${estatePrice.toString()}"
 
 
             this.estateFromRepository = estateFromRepository
 
             confirmButton.setOnClickListener {
+
+                if(durationText.text.toString() == "0" || durationText.text.toString().isBlank()){
+                    Toast.makeText(context, "Invalid duration", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+
                 Log.d("PAYMENT-PAGE", "Confirm button clicked - 1")
                 performCharge(estatePrice)
             }
 
 
 
+
+
+            Glide.with(context).load(estateFromRepository.image1)
+                .placeholder(R.drawable.search_icon)
+                .fitCenter()
+                .centerCrop()
+                .into(propertyImage)
 
             //set available to false
 

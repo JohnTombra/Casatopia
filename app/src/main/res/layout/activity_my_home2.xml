@@ -10,12 +10,13 @@
 
 
 
+
     <androidx.fragment.app.FragmentContainerView
         android:layout_width="match_parent"
-        android:id="@+id/mainFragment"
+        android:id="@+id/mainFragment2"
         app:defaultNavHost="true"
         android:name="androidx.navigation.fragment.NavHostFragment"
-        app:navGraph="@navigation/nav_graph"
+        app:navGraph="@navigation/nav_graph2"
         android:layout_height="match_parent"/>
 
 
@@ -27,25 +28,33 @@
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_height="wrap_content">
 
+
+        <ImageButton
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#ffffff"/>
+
+
         <ImageView
-            android:background="#c6c6c6"
+            android:background="#C6C6C6"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_width="match_parent"
-            android:layout_height="50.5dp"/>
+            android:layout_height="55.5dp"/>
 
         <androidx.cardview.widget.CardView
             app:cardElevation="100dp"
 
+            app:cardBackgroundColor="#FFFFFF"
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_width="match_parent"
-            android:layout_height="50dp">
+            android:layout_height="55dp">
 
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:orientation="horizontal"
                 android:layout_gravity="bottom"
-                android:layout_height="50dp">
+                android:layout_height="match_parent">
 
 
 
@@ -56,23 +65,20 @@
                     android:layout_height="match_parent">
                     <TextView
                         android:layout_width="match_parent"
-                        android:text="Properties"
+                        android:text="My Estates"
                         android:gravity="center"
-                        android:id="@+id/properties"
-                        android:textSize="11dp"
-                        android:textColor="#666666"
+                        android:id="@+id/home"
+                        android:textSize="13dp"
+                        android:textColor="#444444"
                         android:layout_height="0dp"
                         android:layout_weight="1"/>
 
                     <ImageView
                         android:layout_width="match_parent"
-                        android:layout_height="3dp"
+                        android:layout_height="4dp"
+                        android:id="@+id/blue1"
                         android:background="#00bbff"/>
                 </androidx.appcompat.widget.LinearLayoutCompat>
-
-
-
-
 
 
 
@@ -88,15 +94,16 @@
                         android:text="Clients"
                         android:gravity="center"
                         android:id="@+id/clients"
-                        android:textSize="11dp"
-                        android:textColor="#666666"
+                        android:textSize="13dp"
+                        android:textColor="#444444"
                         android:layout_height="0dp"
                         android:layout_weight="1"/>
 
                     <ImageView
                         android:layout_width="match_parent"
-                        android:layout_height="3dp"
+                        android:layout_height="4dp"
                         android:visibility="gone"
+                        android:id="@+id/blue2"
                         android:background="#00bbff"/>
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -112,9 +119,8 @@
                         android:layout_width="match_parent"
                         android:text="Chats"
                         android:gravity="center"
-                        android:textSize="11dp"
                         android:layout_height="0dp"
-                        android:textColor="#666666"
+                        android:textColor="#444444"
                         android:id="@+id/chats"
                         android:layout_weight="1"/>
 
@@ -122,6 +128,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="4dp"
                         android:visibility="gone"
+                        android:id="@+id/blue3"
                         android:background="#00bbff"/>
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -139,9 +146,9 @@
                         android:layout_width="match_parent"
                         android:text="Transactions"
                         android:gravity="center"
-                        android:textSize="11dp"
+                        android:textSize="13dp"
                         android:layout_height="0dp"
-                        android:textColor="#666666"
+                        android:textColor="#444444"
                         android:id="@+id/transactions"
                         android:layout_weight="1"/>
 
@@ -149,6 +156,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="4dp"
                         android:visibility="gone"
+                        android:id="@+id/blue4"
                         android:background="#00bbff"/>
                 </androidx.appcompat.widget.LinearLayoutCompat>
 

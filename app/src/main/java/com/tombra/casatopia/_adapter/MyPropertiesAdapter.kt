@@ -45,7 +45,7 @@ class MyPropertiesAdapter :
                     binding.name.text = estate.estateName
 
 
-                    binding.duration.text = "Duration: ${estate.purchase!!.duration} months"
+                    binding.duration.text = "Duration: ${estate.purchase!!.duration} years"
 
                     binding.amountPaid.text = "Payment: ₦ ${estate.price!!.replace("₦","").replace(",","").toInt() * estate.purchase!!.duration.toInt()}"
 

@@ -123,12 +123,11 @@ class UserDatabase(private val context: Context) {
         }
     }
 
-    //
-//
+
     fun getAuthInfo(): Auth {
-        val authenticated = localGet.getString("Authenticated", "false").toBoolean()
-        val authId = localGet.getString("AuthId", "NO AUTH ID AVAILABLE").toString()
-        val authType = localGet.getString("AuthType", "NO AUTH ID AVAILABLE").toString()
+        val authenticated = localGet.getString("Authenticated", "false").toString()
+        val authId = localGet.getString("AuthId", "").toString()
+        val authType = localGet.getString("AuthType", "").toString()
         return Auth(authenticated, authId, authType)
     }
 
@@ -137,6 +136,7 @@ class UserDatabase(private val context: Context) {
     fun saveAuthInfo(auth: Auth) {
         localSet.putString("Authenticated", auth.authenticated.toString())
         localSet.putString("AuthId", auth.authId)
+        localSet.putString("AuthType", auth.accountType)
         localSet.apply()
     }
 //

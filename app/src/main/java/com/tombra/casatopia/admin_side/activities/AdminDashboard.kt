@@ -1,29 +1,33 @@
 package com.tombra.casatopia.admin_side.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import android.widget.TextView
 import com.tombra.casatopia.R
 
-class AdminDashboard : Fragment() {
+class AdminDashboard : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_admin_dashboard)
 
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return super.onCreateView(inflater, container, savedInstanceState)
+        val profile = findViewById<TextView>(R.id.profile)
+
+        profile.setOnClickListener {
+            startActivity(Intent(this, AdminProfile::class.java))
+        }
+
+        //properties
+        //clients
+        //chats
+
+
+        //transactions
+        //notifications
+        //profile
+
+
+
     }
-
-    //complains
-    //profile
-    //transaction
-    //properties
-    //chat
-    //
-
 }

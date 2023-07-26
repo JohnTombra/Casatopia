@@ -11,115 +11,384 @@
 
 
     <ScrollView
+        app:layout_constraintTop_toTopOf="parent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
 
 
-        <LinearLayout
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
-            android:orientation="vertical"
-            android:layout_height="match_parent">
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp"
+            android:layout_height="wrap_content">
 
 
 
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="25dp"
+                android:layout_marginLeft="8dp"
+                android:id="@+id/logo"
+                android:background="@drawable/round_arrow_back_24"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_height="25dp"/>
+
+
+
+            <TextView
+                app:layout_constraintLeft_toRightOf="@+id/logo"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="6dp"
+                android:textColor="#444444"
+                android:id="@+id/propertyDetails"
+                android:fontFamily="sans-serif"
+                android:textStyle="bold"
+                android:textSize="19dp"
+                android:layout_height="wrap_content"
+                android:text="Upload New Estate"/>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="match_parent"
+                android:id="@+id/image1"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="20dp"
+                android:background="#00bbff"
+                android:layout_height="400dp"/>
+
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="60dp"
+                android:id="@+id/imagex"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:src="@drawable/baseline_add_box_24"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_height="60dp"/>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
             <androidx.appcompat.widget.AppCompatEditText
                 android:layout_width="match_parent"
                 android:hint="Country"
+                android:background="#ffffff"
+                android:paddingLeft="10dp"
                 android:id="@+id/country"
                 android:layout_height="60dp"/>
+        </androidx.cardview.widget.CardView>
 
+
+        <androidx.cardview.widget.CardView
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
             <androidx.appcompat.widget.AppCompatEditText
                 android:layout_width="match_parent"
                 android:hint="State"
                 android:id="@+id/state"
+                android:paddingLeft="10dp"
+                android:background="#ffffff"
                 android:layout_height="60dp"/>
+        </androidx.cardview.widget.CardView>
 
 
+        <androidx.cardview.widget.CardView
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
             <androidx.appcompat.widget.AppCompatEditText
                 android:layout_width="match_parent"
                 android:hint="City"
+                android:background="#ffffff"
                 android:id="@+id/city"
+                android:paddingLeft="10dp"
                 android:layout_height="60dp"/>
+        </androidx.cardview.widget.CardView>
 
 
+        <androidx.cardview.widget.CardView
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
             <androidx.appcompat.widget.AppCompatEditText
                 android:layout_width="match_parent"
                 android:hint="Name"
+                android:background="#ffffff"
                 android:id="@+id/name"
+                android:paddingLeft="10dp"
                 android:layout_height="60dp"/>
+        </androidx.cardview.widget.CardView>
 
 
+        <androidx.cardview.widget.CardView
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
             <androidx.appcompat.widget.AppCompatEditText
                 android:layout_width="match_parent"
                 android:hint="Description"
+                android:background="#ffffff"
                 android:id="@+id/description"
+                android:paddingLeft="10dp"
                 android:layout_height="60dp"/>
+        </androidx.cardview.widget.CardView>
 
+
+        <androidx.cardview.widget.CardView
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <androidx.appcompat.widget.AppCompatEditText
+                android:layout_width="match_parent"
+                android:hint="Bed rooms"
+                android:background="#ffffff"
+                android:digits="0123456789"
+                android:inputType="number"
+                android:id="@+id/bedRooms"
+                android:paddingLeft="10dp"
+                android:layout_height="60dp"/>
+        </androidx.cardview.widget.CardView>
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <androidx.appcompat.widget.AppCompatEditText
+                android:layout_width="match_parent"
+                android:hint="Bath rooms"
+                android:background="#ffffff"
+                android:digits="0123456789"
+                android:inputType="number"
+                android:id="@+id/bathRooms"
+                android:paddingLeft="10dp"
+                android:layout_height="60dp"/>
+        </androidx.cardview.widget.CardView>
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <androidx.appcompat.widget.AppCompatEditText
+                android:layout_width="match_parent"
+                android:hint="Area "
+                android:background="#ffffff"
+                android:id="@+id/area"
+                android:digits="0123456789"
+                android:inputType="number"
+                android:paddingLeft="10dp"
+                android:layout_height="60dp"/>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <androidx.appcompat.widget.AppCompatEditText
+                android:layout_width="match_parent"
+                android:hint="Garage"
+                android:background="#ffffff"
+                android:digits="0123456789"
+                android:inputType="number"
+                android:id="@+id/garage"
+                android:paddingLeft="10dp"
+                android:layout_height="60dp"/>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
             <androidx.appcompat.widget.AppCompatEditText
                 android:layout_width="match_parent"
                 android:hint="type"
                 android:id="@+id/type"
+                android:background="#ffffff"
+                android:paddingLeft="10dp"
                 android:layout_height="60dp"/>
+        </androidx.cardview.widget.CardView>
 
+
+        <androidx.cardview.widget.CardView
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
             <androidx.appcompat.widget.AppCompatEditText
                 android:layout_width="match_parent"
                 android:hint="address"
                 android:id="@+id/address"
+                android:background="#ffffff"
+                android:paddingLeft="10dp"
                 android:layout_height="60dp"/>
+        </androidx.cardview.widget.CardView>
 
+        <androidx.cardview.widget.CardView
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
             <androidx.appcompat.widget.AppCompatEditText
                 android:layout_width="match_parent"
                 android:hint="Price"
                 android:id="@+id/price"
+                android:background="#ffffff"
+                android:paddingLeft="10dp"
                 android:layout_height="60dp"/>
+        </androidx.cardview.widget.CardView>
 
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="200dp"
-                android:id="@+id/image1"
-                android:background="#00bbff"
-                android:layout_height="200dp"/>
+        <androidx.cardview.widget.CardView
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <androidx.appcompat.widget.AppCompatEditText
+                android:layout_width="match_parent"
+                android:hint="Quality rating"
+                android:id="@+id/rating"
+                android:digits="0123456789."
+                android:inputType="number"
+                android:background="#ffffff"
+                android:paddingLeft="10dp"
+                android:layout_height="60dp"/>
+        </androidx.cardview.widget.CardView>
 
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="200dp"
-                android:id="@+id/image2"
-                android:background="#c6c6c6"
-                android:layout_height="200dp"/>
+        <androidx.cardview.widget.CardView
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:text="Ownership document"
+                android:id="@+id/ownershipDocument"
+                android:digits="0123456789."
+                android:textColor="#00bbff"
+                android:inputType="number"
+                android:textStyle="bold"
+                android:background="#ffffff"
+                android:textSize="18dp"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                android:minHeight="60dp"
+                android:layout_height="wrap_content"/>
+        </androidx.cardview.widget.CardView>
 
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="200dp"
-                android:id="@+id/image3"
-                android:background="#0000dd"
-                android:layout_height="200dp"/>
+        <fragment
+            android:id="@+id/map"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="10dp"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            tools:context=".admin_side.activities.UploadProperty"
+            tools:layout="@layout/activity_authentication_account_type_screen" />
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="200dp"
-                android:id="@+id/image4"
-                android:background="#009688"
-                android:layout_height="200dp"/>
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="200dp"
-                android:id="@+id/image5"
-                android:background="#00ddff"
-                android:layout_height="200dp"/>
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:background="#ffffdd"
-                android:layout_width="200dp"
-                android:id="@+id/image6"
-                android:layout_height="200dp"/>
-
+        <androidx.cardview.widget.CardView
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            app:cardCornerRadius="10dp"
+            android:layout_marginBottom="20dp"
+            app:cardElevation="5dp"
+            app:cardBackgroundColor="#00bbff"
+            android:layout_marginRight="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
             <androidx.appcompat.widget.AppCompatButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:text="Upload"
+                android:background="#00bbff"
                 android:id="@+id/button"/>
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
 
-        </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
 
     </ScrollView>

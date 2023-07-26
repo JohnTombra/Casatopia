@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.tombra.casatopia.R
+import com.tombra.casatopia.admin_side.activities.UploadProperty
 import com.tombra.casatopia.user_side.data.UserDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -22,13 +23,13 @@ class AdminProfile : AppCompatActivity() {
         var adminId = intent.extras!!.getString("adminId").toString()
         var estateReferenceId = intent.extras!!.getString("estateReferenceId").toString()
 
+        val context: Context = this
 
         val adminName = findViewById<TextView>(R.id.adminName)
         val adminImage = findViewById<ImageView>(R.id.adminImage)
         val startConversation = findViewById<Button>(R.id.startConversation)
 
 
-        val context: Context = this
         val userDatabase = UserDatabase(context)
 
 

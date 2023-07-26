@@ -95,8 +95,8 @@ class MyProperty : AppCompatActivity(), OnMapReadyCallback {
 
             bedrooms.text = "${estateFromRepository.bedrooms} Bedrooms"
             bathrooms.text = "${estateFromRepository.bathrooms} Bathrooms"
-            area.text = estateFromRepository.area
-            garage.text = estateFromRepository.garage
+            area.text = "${estateFromRepository.area} SQRT"
+            garage.text = "${estateFromRepository.garage} Garage"
 
 
             ownerShipDocument.setOnClickListener {

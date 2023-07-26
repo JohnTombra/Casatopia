@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/adminHome">
+    <fragment
+        android:id="@+id/adminHome"
+        android:name="com.tombra.casatopia.admin_side.activities.AdminHome"
+        android:label="activity_admin_home"
+        tools:layout="@layout/activity_admin_home" >
+        <action
+            android:id="@+id/action_adminHome_to_myClients"
+            app:destination="@id/myClients" />
+    </fragment>
+    <fragment
+        android:id="@+id/myClients"
+        android:name="com.tombra.casatopia.admin_side.activities.MyClients"
+        android:label="MyClients" /><action android:id="@+id/action_global_myClients" app:destination="@id/myClients"/>
+    <fragment
+        android:id="@+id/myTransactions"
+        android:name="com.tombra.casatopia.admin_side.activities.MyTransactions"
+        android:label="activity_transactions"
+        tools:layout="@layout/activity_transactions" /><action android:id="@+id/action_global_myTransactions" app:destination="@id/myTransactions"/>
+    <action android:id="@+id/action_global_adminHome" app:destination="@id/adminHome" />
+    <fragment
+        android:id="@+id/myChats2"
+        android:name="com.tombra.casatopia.user_side.activities.MyChats"
+        android:label="activity_my_chats"
+        tools:layout="@layout/activity_my_chats" /><action android:id="@+id/action_global_myChats2" app:destination="@id/myChats2"/>
+</navigation>

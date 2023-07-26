@@ -2,85 +2,96 @@ package com.tombra.casatopia.admin_side.activities
 
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.view.isVisible
 import androidx.navigation.fragment.NavHostFragment
 import com.tombra.casatopia.R
 import com.tombra.casatopia.user_side.activities.Profile
 
 class MyHome : AppCompatActivity() {
     lateinit var context: Context
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_my_home2)
 
 
 
-        ///ADD
-
 
         context = this
 
-        val fragmentManager = supportFragmentManager.findFragmentById(R.id.mainFragment) as NavHostFragment
+        val fragmentManager = supportFragmentManager.findFragmentById(R.id.mainFragment2) as NavHostFragment
         val navController = fragmentManager.navController
 
-
-        val properties = findViewById<TextView>(R.id.properties)
+//
+        val home = findViewById<TextView>(R.id.home)
         val clients = findViewById<TextView>(R.id.clients)
-        val chats = findViewById<TextView>(R.id.chats)
         val transactions = findViewById<TextView>(R.id.transactions)
+        val chats = findViewById<TextView>(R.id.chats)
 
 
-        var current = 1
+        val blue1 = findViewById<ImageView>(R.id.blue1)
+        val blue2 = findViewById<ImageView>(R.id.blue2)
+        val blue3 = findViewById<ImageView>(R.id.blue3)
+        val blue4 = findViewById<ImageView>(R.id.blue4)
 
-        properties.setOnClickListener {
-            when(current){
-                2 -> {
 
-                }
-                3 -> {
 
-                }
-            }
 
-            current = 1
 
+//
+//
+        home.setOnClickListener {
+            navController.navigate(R.id.action_global_adminHome)
+            blue1.isVisible = true
+            blue2.isVisible = false
+            blue3.isVisible = false
+            blue4.isVisible = false
         }
-
-        chats.setOnClickListener {
-            when(current){
-                1 -> {
-
-                }
-                3 -> {
-
-                }
-            }
-
-            current = 2
-
-        }
-
-        chats.setOnClickListener {
-
-            when(current){
-                1 -> {
-
-                }
-                2 -> {
-                }
-            }
-
-            current = 3
+//
+//
 
 
-        }
+        navController.navigate(R.id.action_global_adminHome)
 
         transactions.setOnClickListener {
-            startActivity(Intent(context, Profile::class.java))
+            navController.navigate(R.id.action_global_myTransactions)
+            blue4.isVisible = true
+            blue1.isVisible = false
+            blue3.isVisible = false
+            blue2.isVisible = false
+        }
+//
+//
+        clients.setOnClickListener {
+            navController.navigate(R.id.action_global_myClients)
+            blue2.isVisible = true
+            blue3.isVisible = false
+            blue1.isVisible = false
+            blue4.isVisible = false
+        }
+//
+//
+//
+        chats.setOnClickListener {
+            navController.navigate(R.id.action_global_myChats2)
+            blue3.isVisible = true
+            blue2.isVisible = false
+            blue4.isVisible = false
+            blue1.isVisible = false
         }
 
 
     }
+
+
+    override fun onBackPressed() {
+        moveTaskToBack(true)
+    }
+
+
 }

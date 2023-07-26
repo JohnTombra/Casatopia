@@ -11,6 +11,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.tombra.casatopia.R
@@ -42,7 +43,9 @@ class UserHome : Fragment() {
         var userDatabase = UserDatabase(context)
 
 
-        userDatabase.saveAuthInfo(Auth(true, "9", "user"))
+     //   userDatabase.saveAuthInfo(Auth(true, "9", "user"))
+
+
 
 
         //my properties

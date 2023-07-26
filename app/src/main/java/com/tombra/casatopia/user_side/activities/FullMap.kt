@@ -39,7 +39,7 @@ class FullMap : AppCompatActivity(), OnMapReadyCallback {
         val location = LatLng(latitude, longitude)
         mMap.addMarker(MarkerOptions().position(location).title("Property Location"))
         mMap.moveCamera(CameraUpdateFactory.newLatLng(location))
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(location, 10.0F))
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(location, 15.0F))
     }
 
 

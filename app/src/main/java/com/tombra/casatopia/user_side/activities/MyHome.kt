@@ -77,4 +77,8 @@ class MyHome : AppCompatActivity() {
         }
 
     }
+
+    override fun onBackPressed() {
+        moveTaskToBack(true)
+    }
 }

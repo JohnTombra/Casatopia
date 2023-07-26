@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".user_side.activities.UserPropertyDetails">
 
-
     <ScrollView
         android:layout_width="match_parent"
         app:layout_constraintTop_toTopOf="parent"

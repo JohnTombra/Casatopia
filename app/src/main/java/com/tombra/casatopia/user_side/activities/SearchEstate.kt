@@ -32,7 +32,7 @@ class SearchEstate : AppCompatActivity() {
         var userDatabase = UserDatabase(context)
 
 
-        userDatabase.saveAuthInfo(Auth(true, "9", "user"))
+        userDatabase.saveAuthInfo(Auth("true", "9", "user"))
 
 
         var searchRecycler = findViewById<RecyclerView>(R.id.searchRecycler)

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".admin_side.activities.AdminDashboard">
+
+    
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_height="wrap_content">
+
+
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:background="#222222"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="Add Estate"
+                android:textColor="#ffffff"
+                android:layout_height="wrap_content"
+                android:id="@+id/addEstate"/>
+            <androidx.appcompat.widget.AppCompatButton
+                android:background="#222222"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="Profile"
+                android:textColor="#ffffff"
+                android:layout_height="wrap_content"
+                android:id="@+id/profile"/>
+            <androidx.appcompat.widget.AppCompatButton
+                android:background="#222222"
+                android:layout_width="0dp"
+                android:textColor="#ffffff"
+                android:layout_weight="1"
+                android:text="Notification"
+                android:layout_height="wrap_content"
+                android:id="@+id/notifications"/>
+            <androidx.appcompat.widget.AppCompatButton
+                android:background="#222222"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="Properties"
+                android:textColor="#ffffff"
+                android:layout_height="wrap_content"
+                android:id="@+id/properties"/>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_height="wrap_content">
+            <androidx.appcompat.widget.AppCompatButton
+                android:background="#222222"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="Clients"
+                android:textColor="#ffffff"
+                android:layout_height="wrap_content"
+                android:id="@+id/clients"/>
+            <androidx.appcompat.widget.AppCompatButton
+                android:background="#222222"
+                android:layout_width="0dp"
+                android:textColor="#ffffff"
+                android:layout_weight="1"
+                android:text="Chats"
+                android:layout_height="wrap_content"
+                android:id="@+id/chats"/>
+            <androidx.appcompat.widget.AppCompatButton
+                android:background="#222222"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="Transactions"
+                android:textColor="#ffffff"
+                android:layout_height="wrap_content"
+                android:id="@+id/transactions"/>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

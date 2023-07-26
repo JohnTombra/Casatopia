@@ -4,4 +4,6 @@ data class Admin(
     val adminId: String = "",
     val firstName: String = "",
     val lastName: String = "",
-    val imageLink: String = "")
+    val imageLink: String = "",
+    val type: String = ""
+    )
