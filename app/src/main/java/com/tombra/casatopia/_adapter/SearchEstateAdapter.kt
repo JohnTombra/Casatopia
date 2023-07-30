@@ -33,7 +33,6 @@ class SearchItemAdapter(val callback: (Int) -> Unit) :
                 binding.address.text = address
                 binding.price.text = "\u20A6 $price"
                 Glide.with(context).load(image1)
-                    .placeholder(R.drawable.search_icon)
                     .fitCenter()
                     .centerCrop()
                     .into(binding.image)

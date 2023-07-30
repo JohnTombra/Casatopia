@@ -3,6 +3,7 @@ package com.tombra.casatopia.admin_side.activities
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.ImageView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.tombra.casatopia.R
@@ -14,6 +15,12 @@ class AdminNotifications : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.admin_notification)
+
+        val logo = findViewById<ImageView>(R.id.logo)
+
+        logo.setOnClickListener {
+            onBackPressed()
+        }
 
 
         var recycler = findViewById<RecyclerView>(R.id.recycler)

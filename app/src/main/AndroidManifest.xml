@@ -13,76 +13,61 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_launcher2"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.Casatopia"
         tools:targetApi="31">
         <activity
-            android:name=".AdminNotifications"
+            android:name=".admin_side.activities.DocumentsActivity"
             android:exported="false" />
         <activity
-            android:name=".AdminProfile"
+            android:name=".admin_side.activities.MyClientsActivity"
             android:exported="false" />
         <activity
-            android:name=".AdminDashboard"
+            android:name=".admin_side.activities.MyChatsActivity"
             android:exported="false" />
         <activity
-            android:name=".ClientProfile"
-            android:exported="false" />
-        <activity
-            android:name=".user_side.activities.AUTHENTICATION_ACCOUNT_TYPE_SCREEN"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".user_side.activities.AUTHENTICATION_LOGIN"
-            android:exported="true" >
-
-        </activity>
-        <activity
-            android:name=".user_side.activities.AUTHENTICATION_SIGNUP"
-            android:exported="true">
-
-        </activity>
-        <activity
-            android:name=".MyProperty"
-            android:exported="false" />
-        <activity
-            android:name=".admin_side.activities.MyHome"
-            android:exported="true">
-
-        </activity>
-        <activity
-            android:name=".user_side.activities.MyHome"
-            android:exported="true" >
-
-
-
-        </activity>
-        <activity
-            android:name=".admin_side.activities.ChatWithClient"
-            android:exported="false" />
-        <activity
-            android:name=".admin_side.activities.ClientProfile"
+            android:name=".admin_side.activities.MyEstatesActivity"
             android:exported="false" />
         <activity
             android:name=".admin_side.activities.AdminNotifications"
-            android:exported="false" />
-        <activity
-            android:name=".MyChats"
-            android:exported="false" />
-        <activity
-            android:name=".user_side.activities.MyProperty"
             android:exported="false" />
         <activity
             android:name=".admin_side.activities.AdminProfile"
             android:exported="false" />
         <activity
             android:name=".admin_side.activities.AdminDashboard"
+            android:exported="false" />
+        <activity
+            android:name=".admin_side.activities.ClientProfile"
+            android:exported="false" />
+        <activity
+            android:name=".user_side.activities.AUTHENTICATION_ACCOUNT_TYPE_SCREEN"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".user_side.activities.AUTHENTICATION_LOGIN"
+            android:exported="true" />
+        <activity
+            android:name=".user_side.activities.AUTHENTICATION_SIGNUP"
+            android:exported="true" />
+        <activity
+            android:name=".user_side.activities.MyProperty"
+            android:exported="false" />
+        <activity
+            android:name=".admin_side.activities.MyHome"
+            android:exported="true" />
+        <activity
+            android:name=".user_side.activities.MyHome"
+            android:exported="true" />
+        <activity
+            android:name=".admin_side.activities.ChatWithClient"
             android:exported="false" />
         <activity
             android:name=".admin_side.activities.AdminTransactionDetail"
@@ -103,36 +88,19 @@
             android:value="AIzaSyB_JBmO70RonaNpAzG-86DCzKEZPGFIyrc" />
 
         <activity
-            android:name=".MapsActivity"
-            android:exported="false"
-            android:label="@string/title_activity_maps" />
-        <activity
-            android:name=".user_side.activities.UserPropertyDetail"
+            android:name=".user_side.activities.UserPropertyDetails"
             android:exported="false" />
         <activity
             android:name=".user_side.activities.UserHome"
-            android:exported="true" >
-
-
-
-        </activity>
+            android:exported="true" />
         <activity
-            android:name=".AdminPropertyDetail"
-            android:exported="false" />
-        <activity
-            android:name=".setDoctorProfile"
+            android:name=".admin_side.activities.AdminPropertyDetail"
             android:exported="false" />
         <activity
             android:name=".admin_side.activities.AdminHome"
             android:exported="true" />
         <activity
             android:name=".admin_side.activities.UploadProperty"
-            android:exported="true" />
-        <activity
-            android:name=".admin_side.activities.AdminPropertyDetail"
-            android:exported="true" />
-        <activity
-            android:name=".user_side.activities.UserPropertyDetails"
             android:exported="true" />
         <activity
             android:name=".user_side.activities.AdminProfile"
@@ -148,17 +116,11 @@
             android:name=".user_side.activities.Profile"
             android:exported="false" />
         <activity
-            android:name=".user_side.activities.UserEstateDetail"
-            android:exported="false" />
-        <activity
             android:name=".user_side.activities.UserDashBoard"
             android:exported="true" />
         <activity
             android:name=".user_side.activities.SearchEstate"
             android:exported="true" />
-        <activity
-            android:name=".user_side.activities.AdminProfile"
-            android:exported="false" />
         <activity
             android:name=".user_side.activities.ChatWithAdmin"
             android:exported="false" />

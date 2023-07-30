@@ -36,7 +36,11 @@ class UserPropertyDetails : AppCompatActivity(), OnMapReadyCallback {
         var context: Context = this
         var userDatabase = UserDatabase(context)
 
+        val logo = findViewById<ImageView>(R.id.logo)
 
+        logo.setOnClickListener {
+            onBackPressed()
+        }
 
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map2) as SupportMapFragment
@@ -77,7 +81,6 @@ class UserPropertyDetails : AppCompatActivity(), OnMapReadyCallback {
             val eName = estateFromRepository.estateName
 
             Glide.with(context).load(eImageLink)
-                .placeholder(R.drawable.search_icon)
                 .fitCenter()
                 .centerCrop()
                 .into(estateImage)

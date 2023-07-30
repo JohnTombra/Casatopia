@@ -10,7 +10,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.*
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityCompat
+import androidx.core.view.isVisible
 import com.bumptech.glide.Glide
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -23,6 +25,7 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.tombra.casatopia.R
+import com.tombra.casatopia._model.Document
 import com.tombra.casatopia.admin_side.data.AdminDatabase
 import com.tombra.casatopia._model.Estate
 import java.util.*
@@ -66,13 +69,19 @@ class UploadProperty : AppCompatActivity(), OnMapReadyCallback {
         val adminDatabase: AdminDatabase = AdminDatabase(this)
 
 
+        val loadingScreen = findViewById<ConstraintLayout>(R.id.loadingScreen)
+
         fusedLocationProviderClient =  LocationServices.getFusedLocationProviderClient(context)
         fetchLocation()
 
         mStorageref =
             FirebaseStorage.getInstance("gs://casatopia-c2993.appspot.com/").getReference("images")
 
+        val logo = findViewById<ImageView>(R.id.logo)
 
+        logo.setOnClickListener {
+            onBackPressed()
+        }
 
         val estateName = findViewById<EditText>(R.id.name)
         val country = findViewById<EditText>(R.id.country)
@@ -199,7 +208,7 @@ class UploadProperty : AppCompatActivity(), OnMapReadyCallback {
                 if (mPdfUri1 != null) {
 
 
-
+                    loadingScreen.isVisible = true
 
                     val savedas2 = System.currentTimeMillis().toString() + ""
                     val fileReference = mStorageref!!.child(savedas2)
@@ -270,11 +279,18 @@ class UploadProperty : AppCompatActivity(), OnMapReadyCallback {
                                                 ownershipDocument = documentPath1
                                             )
 
+                                            val document = Document(System.currentTimeMillis().toString(), estateName, documentPath1)
+
+                                            adminDatabase.uploadDocument(document){}
+
                                             Log.d("ACTIVITY", "UPLOADING ESTATE")
                                             adminDatabase.uploadEstate(estate) {
                                                 //success
                                                 Log.d("ACTIVITY", "UPLOAD SUCCESS")
+                                                startActivity(Intent(context, MyHome::class.java))
+                                                Toast.makeText(context,"Upload successful", Toast.LENGTH_SHORT).show()
                                             }
+
 
 
                                         }
@@ -319,7 +335,7 @@ class UploadProperty : AppCompatActivity(), OnMapReadyCallback {
             when(selected){
                 1-> {
                     mImageUri1 = data.data
-                    Glide.with(context).load(mImageUri1).placeholder(R.drawable.avatarnoborder).centerCrop()
+                    Glide.with(context).load(mImageUri1).centerCrop()
                         .into(image1)
                 }
 

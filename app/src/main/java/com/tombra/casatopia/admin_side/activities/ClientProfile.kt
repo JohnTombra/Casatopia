@@ -49,7 +49,6 @@ class ClientProfile : AppCompatActivity() {
 
 
                 Glide.with(context).load(userFromRepository.userImageLink)
-                    .placeholder(R.drawable.search_icon)
                     .fitCenter()
                     .centerCrop()
                     .into(userImage)

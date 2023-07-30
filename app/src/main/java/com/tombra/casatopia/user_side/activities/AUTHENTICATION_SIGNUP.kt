@@ -11,6 +11,8 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.isVisible
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.tombra.casatopia.R
@@ -45,6 +47,8 @@ class AUTHENTICATION_SIGNUP : AppCompatActivity() {
 
         val gotoLogin = findViewById<TextView>(R.id.login)
 
+        val loadingScreen = findViewById<ConstraintLayout>(R.id.loadingScreen)
+
 
 
         gotoLogin.setOnClickListener {
@@ -54,47 +58,52 @@ class AUTHENTICATION_SIGNUP : AppCompatActivity() {
 
         signup.setOnClickListener {
 
-            if(TextUtils.isEmpty(email.text.toString())){
-                Toast.makeText(context,"Fill in your email", Toast.LENGTH_SHORT).show()
+            if (TextUtils.isEmpty(email.text.toString())) {
+                Toast.makeText(context, "Fill in your email", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
-            if(TextUtils.isEmpty(password.text.toString())){
-                Toast.makeText(context,"Fill in your password", Toast.LENGTH_SHORT).show()
+            if (TextUtils.isEmpty(password.text.toString())) {
+                Toast.makeText(context, "Fill in your password", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
-            if(TextUtils.isEmpty(verifyPassword.text.toString())){
-                Toast.makeText(context,"Confirm your password", Toast.LENGTH_SHORT).show()
+            if (TextUtils.isEmpty(verifyPassword.text.toString())) {
+                Toast.makeText(context, "Confirm your password", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
-            if(password.text.toString() != verifyPassword.text.toString()){
-                Toast.makeText(context,"Passwords do not match", Toast.LENGTH_SHORT).show()
+            if (password.text.toString() != verifyPassword.text.toString()) {
+                Toast.makeText(context, "Passwords do not match", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
-            if(TextUtils.isEmpty(firstName.text.toString())){
-                Toast.makeText(context,"Fill in your first name", Toast.LENGTH_SHORT).show()
+            if (TextUtils.isEmpty(firstName.text.toString())) {
+                Toast.makeText(context, "Fill in your first name", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
 
-            if(TextUtils.isEmpty(lastName.text.toString())){
-                Toast.makeText(context,"Fill in your last name", Toast.LENGTH_SHORT).show()
+            if (TextUtils.isEmpty(lastName.text.toString())) {
+                Toast.makeText(context, "Fill in your last name", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
+            loadingScreen.isVisible = true
 
             //add check for if email already exists
-                mAuth.createUserWithEmailAndPassword(email.text.toString(), password.text.toString()).addOnCompleteListener { task ->
+            mAuth.createUserWithEmailAndPassword(email.text.toString(), password.text.toString())
+                .addOnCompleteListener { task ->
 
-                    if(task.isSuccessful){
-                        Toast.makeText(context, "Registration successful", Toast.LENGTH_SHORT).show()
+                    if (task.isSuccessful) {
+
+                        loadingScreen.isVisible = false
+                        Toast.makeText(context, "Registration successful", Toast.LENGTH_SHORT)
+                            .show()
 
                         val network: FirebaseDatabase = FirebaseDatabase.getInstance()
 
-                        val signup =  Signup(
+                        val signup = Signup(
                             mAuth.currentUser!!.uid,
                             false,
                             "",
@@ -102,14 +111,18 @@ class AUTHENTICATION_SIGNUP : AppCompatActivity() {
                             lastName.text.toString()
                         )
 
+                        network.reference.child("Accounts").child(mAuth.currentUser!!.uid)
+                            .setValue(signup).addOnSuccessListener {
+                            startActivity(Intent(context, AUTHENTICATION_LOGIN::class.java))
+                        }
 
-
-                            network.reference.child("Accounts").child(mAuth.currentUser!!.uid).setValue(signup).addOnSuccessListener {
-                                startActivity(Intent(context, AUTHENTICATION_LOGIN::class.java))
-                            }
-
-                    }else{
-                        Toast.makeText(context, "Registration failed ${task.exception!!.message}", Toast.LENGTH_SHORT).show()
+                    } else {
+                        loadingScreen.isVisible = false
+                        Toast.makeText(
+                            context,
+                            "Registration failed ${task.exception!!.message}",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
 
                 }
@@ -118,11 +131,12 @@ class AUTHENTICATION_SIGNUP : AppCompatActivity() {
         }
 
 
-
-
-
     }
 
+
+    override fun onBackPressed() {
+        moveTaskToBack(true)
+    }
 
 
 }

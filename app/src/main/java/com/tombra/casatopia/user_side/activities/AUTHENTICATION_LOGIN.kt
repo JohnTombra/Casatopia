@@ -10,6 +10,8 @@ import android.util.Log
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.isVisible
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.tombra.casatopia.R
@@ -38,6 +40,8 @@ class AUTHENTICATION_LOGIN : AppCompatActivity() {
         val login = findViewById<TextView>(R.id.login)
         val gotoSignup = findViewById<TextView>(R.id.signup)
 
+        val loadingScreen = findViewById<ConstraintLayout>(R.id.loadingScreen)
+
         val network: FirebaseDatabase = FirebaseDatabase.getInstance()
 
         gotoSignup.setOnClickListener {
@@ -58,6 +62,7 @@ class AUTHENTICATION_LOGIN : AppCompatActivity() {
             }
 
 
+            loadingScreen.isVisible = true
 
 
             val userDatabase = UserDatabase(context)
@@ -104,7 +109,7 @@ class AUTHENTICATION_LOGIN : AppCompatActivity() {
                                         mAuth.currentUser!!.uid,
                                         result!!.firstName!!,
                                         result!!.lastName!!,
-                                        "",
+                                        "https://firebasestorage.googleapis.com/v0/b/casatopia-c2993.appspot.com/o/images%2F1689783721607?alt=media&token=43f4e898-771c-434c-876f-090d86ce46d7",
                                         "Admins"
                                     )
                                     Log.d("AUTH", "${result.type} -----3")
@@ -137,7 +142,7 @@ class AUTHENTICATION_LOGIN : AppCompatActivity() {
                                         mAuth.currentUser!!.uid,
                                         result!!.firstName!!,
                                         result!!.lastName!!,
-                                        "",
+                                        "https://firebasestorage.googleapis.com/v0/b/casatopia-c2993.appspot.com/o/images%2F1689783721607?alt=media&token=43f4e898-771c-434c-876f-090d86ce46d7",
                                         "Users"
                                     )
                                     Log.d("AUTH", "${result.type} -----4")
@@ -172,6 +177,7 @@ class AUTHENTICATION_LOGIN : AppCompatActivity() {
 
 
                     } else {
+                        loadingScreen.isVisible = false
                         Toast.makeText(
                             context,
                             "Login failed ${task.exception!!.message}",
@@ -187,4 +193,10 @@ class AUTHENTICATION_LOGIN : AppCompatActivity() {
 
 
     }
+
+
+    override fun onBackPressed() {
+        moveTaskToBack(true)
+    }
+
 }

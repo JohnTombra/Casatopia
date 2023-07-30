@@ -2,6 +2,7 @@ package com.tombra.casatopia.user_side.activities
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -66,7 +67,11 @@ class MyProperty : AppCompatActivity(), OnMapReadyCallback {
 
         val rating = findViewById<RatingBar>(R.id.rating2)
 
+        val logo = findViewById<ImageView>(R.id.logo)
 
+        logo.setOnClickListener {
+            onBackPressed()
+        }
 
         Log.d("ACTIVITY", estateId)
 
@@ -77,7 +82,6 @@ class MyProperty : AppCompatActivity(), OnMapReadyCallback {
             val eName = estateFromRepository.estateName
 
             Glide.with(context).load(eImageLink)
-                .placeholder(R.drawable.search_icon)
                 .fitCenter()
                 .centerCrop()
                 .into(estateImage)
@@ -99,9 +103,11 @@ class MyProperty : AppCompatActivity(), OnMapReadyCallback {
             garage.text = "${estateFromRepository.garage} Garage"
 
 
-            ownerShipDocument.setOnClickListener {
 
-            val documentLink = estateFromRepository.ownershipDocument
+            ownerShipDocument.setOnClickListener {
+                Log.d("DOWNLOAD", "CLICKED")
+                val documentLink = estateFromRepository.ownershipDocument
+                retrievePdf(documentLink)
                 //download document
             }
 
@@ -139,6 +145,11 @@ class MyProperty : AppCompatActivity(), OnMapReadyCallback {
 
     }
 
+
+
+    fun retrievePdf(uri: String){
+        startActivity(Intent(Intent.ACTION_VIEW).setType("application/pdf").setData(Uri.parse(uri)) )
+    }
 
 
     override fun onMapReady(googleMap: GoogleMap) {

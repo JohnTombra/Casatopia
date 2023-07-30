@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -32,9 +33,7 @@ class UserHome : Fragment() {
 
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         _binding = ActivityUserHomeBinding.inflate(inflater, container, false)
 
@@ -43,9 +42,7 @@ class UserHome : Fragment() {
         var userDatabase = UserDatabase(context)
 
 
-     //   userDatabase.saveAuthInfo(Auth(true, "9", "user"))
-
-
+        //   userDatabase.saveAuthInfo(Auth(true, "9", "user"))
 
 
         //my properties
@@ -73,6 +70,10 @@ class UserHome : Fragment() {
 
 
         userDatabase.getAllEstates { resultFromRepository ->
+            binding.progress.isVisible = false
+
+
+
             rez = resultFromRepository
             estatesAdapter.submitList(resultFromRepository)
         }

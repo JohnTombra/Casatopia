@@ -33,6 +33,12 @@ class AdminProfile : AppCompatActivity() {
         val userDatabase = UserDatabase(context)
 
 
+        val logo = findViewById<ImageView>(R.id.logo)
+
+        logo.setOnClickListener {
+            onBackPressed()
+        }
+
         userDatabase.getAdminProfile(adminId){ admin ->
 
             //set texts stuff here
@@ -44,7 +50,6 @@ class AdminProfile : AppCompatActivity() {
 
 
                 Glide.with(context).load(admin.imageLink)
-                    .placeholder(R.drawable.search_icon)
                     .fitCenter()
                     .centerCrop()
                     .into(adminImage)

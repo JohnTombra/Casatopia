@@ -5,11 +5,13 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.NavHostFragment
 import com.tombra.casatopia.R
+import com.tombra.casatopia.admin_side.data.AdminDatabase
 import com.tombra.casatopia.user_side.activities.Profile
 
 class MyHome : AppCompatActivity() {
@@ -23,6 +25,9 @@ class MyHome : AppCompatActivity() {
 
 
         context = this
+
+        val adminDatabase = AdminDatabase(context)
+
 
         val fragmentManager = supportFragmentManager.findFragmentById(R.id.mainFragment2) as NavHostFragment
         val navController = fragmentManager.navController
@@ -77,6 +82,7 @@ class MyHome : AppCompatActivity() {
 //
 //
 //
+
         chats.setOnClickListener {
             navController.navigate(R.id.action_global_myChats2)
             blue3.isVisible = true
@@ -84,6 +90,18 @@ class MyHome : AppCompatActivity() {
             blue4.isVisible = false
             blue1.isVisible = false
         }
+
+
+
+        adminDatabase.listenForAllUnread {
+            Log.d("HOME FRAGMENT","LISTENED FOR GLOBAL")
+            if(it > 0){
+                chats.text = "Chats (${it})"
+            }else{
+                chats.text = "Chats"
+            }
+        }
+
 
 
     }

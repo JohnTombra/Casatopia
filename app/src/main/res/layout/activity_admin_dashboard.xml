@@ -3,95 +3,322 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="#ffffff"
     android:layout_height="match_parent"
     tools:context=".admin_side.activities.AdminDashboard">
 
-    
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="25dp"
+        android:layout_marginLeft="8dp"
+        android:id="@+id/logo"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/round_arrow_back_24"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_height="25dp"/>
+
+
+    <TextView
+        app:layout_constraintLeft_toRightOf="@+id/logo"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_marginLeft="6dp"
+        android:textColor="#444444"
+        android:layout_marginTop="20dp"
+        android:id="@+id/propertyDetails"
+        android:fontFamily="sans-serif"
+        android:textStyle="bold"
+        android:textSize="19dp"
+        android:layout_height="wrap_content"
+        android:text="Dashboard"/>
+
+
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         android:orientation="vertical"
+        android:gravity="center"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_height="wrap_content">
+        android:layout_height="300dp">
 
 
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:orientation="horizontal"
+            android:gravity="center"
+
             app:layout_constraintTop_toTopOf="parent"
             android:layout_height="wrap_content">
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:background="#222222"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:text="Add Estate"
-                android:textColor="#ffffff"
-                android:layout_height="wrap_content"
-                android:id="@+id/addEstate"/>
-            <androidx.appcompat.widget.AppCompatButton
-                android:background="#222222"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:text="Profile"
-                android:textColor="#ffffff"
-                android:layout_height="wrap_content"
-                android:id="@+id/profile"/>
-            <androidx.appcompat.widget.AppCompatButton
-                android:background="#222222"
-                android:layout_width="0dp"
-                android:textColor="#ffffff"
-                android:layout_weight="1"
-                android:text="Notification"
-                android:layout_height="wrap_content"
-                android:id="@+id/notifications"/>
-            <androidx.appcompat.widget.AppCompatButton
-                android:background="#222222"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:text="Properties"
-                android:textColor="#ffffff"
-                android:layout_height="wrap_content"
-                android:id="@+id/properties"/>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="150dp"
+                android:layout_marginRight="10dp"
+                app:cardCornerRadius="20dp"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:layout_width="match_parent"
+                    android:text="Profile"
+                    android:id="@+id/profile"
+                    android:textSize="12dp"
+                    android:background="#444444"
+                    android:textColor="#ffffff"
+                    android:layout_height="wrap_content"
+                    />
+
+            </androidx.cardview.widget.CardView>
+
+
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="150dp"
+                app:cardCornerRadius="20dp"
+
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:layout_width="match_parent"
+                    android:text="Add"
+                    android:id="@+id/add"
+                    android:textSize="12dp"
+                    android:background="#444444"
+                    android:textColor="#ffffff"
+                    android:layout_height="wrap_content"
+                    />
+
+            </androidx.cardview.widget.CardView>
+
         </androidx.appcompat.widget.LinearLayoutCompat>
 
 
 
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="20dp"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_height="wrap_content">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="150dp"
+                app:cardCornerRadius="20dp"
+                android:layout_marginRight="10dp"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:layout_width="match_parent"
+                    android:text="Documents"
+                    android:textSize="12dp"
+                    android:id="@+id/documents"
+                    android:background="#444444"
+                    android:textColor="#ffffff"
+                    android:layout_height="wrap_content"
+                    />
+
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:layout_width="150dp"
+                app:cardCornerRadius="20dp"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:layout_width="match_parent"
+                    android:text="Notifications"
+                    android:textSize="12dp"
+                    android:id="@+id/notifications"
+                    android:background="#444444"
+                    android:textColor="#ffffff"
+                    android:layout_height="wrap_content"
+                    />
+
+            </androidx.cardview.widget.CardView>
+
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="20dp"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_height="wrap_content">
-            <androidx.appcompat.widget.AppCompatButton
-                android:background="#222222"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:text="Clients"
-                android:textColor="#ffffff"
-                android:layout_height="wrap_content"
-                android:id="@+id/clients"/>
-            <androidx.appcompat.widget.AppCompatButton
-                android:background="#222222"
-                android:layout_width="0dp"
-                android:textColor="#ffffff"
-                android:layout_weight="1"
-                android:text="Chats"
-                android:layout_height="wrap_content"
-                android:id="@+id/chats"/>
-            <androidx.appcompat.widget.AppCompatButton
-                android:background="#222222"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:text="Transactions"
-                android:textColor="#ffffff"
-                android:layout_height="wrap_content"
-                android:id="@+id/transactions"/>
+            <androidx.cardview.widget.CardView
+                android:layout_width="150dp"
+                android:layout_marginRight="10dp"
+                app:cardCornerRadius="20dp"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:layout_width="match_parent"
+                    android:text="My Estates"
+                    android:background="#444444"
+                    android:textSize="12dp"
+                    android:id="@+id/myEstates"
+                    android:textColor="#ffffff"
+                    android:layout_height="wrap_content"
+                    />
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="150dp"
+                app:cardCornerRadius="20dp"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:layout_width="match_parent"
+                    android:text="Clients"
+                    android:textSize="12dp"
+                    android:id="@+id/clients"
+                    android:background="#444444"
+                    android:textColor="#ffffff"
+                    android:layout_height="wrap_content"
+                    />
+
+            </androidx.cardview.widget.CardView>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_height="wrap_content">
+            <androidx.cardview.widget.CardView
+                android:layout_width="150dp"
+                app:cardCornerRadius="20dp"
+                android:layout_marginRight="10dp"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:layout_width="match_parent"
+                    android:text="Chats"
+                    android:textSize="12dp"
+                    android:id="@+id/chats"
+                    android:background="#444444"
+                    android:textColor="#ffffff"
+                    android:layout_height="wrap_content"
+                    />
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="150dp"
+                app:cardCornerRadius="20dp"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:layout_width="match_parent"
+                    android:text="Log out"
+                    android:textSize="12dp"
+                    android:id="@+id/logout"
+                    android:background="#444444"
+                    android:textColor="#ffffff"
+                    android:layout_height="wrap_content"
+                    />
+
+            </androidx.cardview.widget.CardView>
+
         </androidx.appcompat.widget.LinearLayoutCompat>
 
 
 
     </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:id="@+id/logOutLayout"
+        android:visibility="gone"
+        android:layout_height="match_parent">
+
+        <ImageButton
+            android:layout_width="match_parent"
+            android:background="#000000"
+            android:alpha="0.8"
+            android:layout_height="match_parent"/>
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="200dp"
+            app:cardCornerRadius="20dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_height="150dp">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_gravity="center"
+                    android:textStyle="bold"
+                    android:textSize="17dp"
+                    android:text="Do you want to log out?"
+                    android:layout_height="wrap_content"/>
+
+
+                <androidx.cardview.widget.CardView
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    app:cardCornerRadius="25dp"
+                    app:cardBackgroundColor="#444444"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp">
+
+                    <TextView
+                        android:text="Confirm"
+                        android:textColor="#ffffff"
+                        android:layout_gravity="center"
+                        android:textStyle="bold"
+                        android:id="@+id/logOut"
+                        android:textSize="19dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"/>
+
+
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:text="cancel"
+                    android:textColor="#666666"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:textSize="15dp"
+                    android:id="@+id/close"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+        </androidx.cardview.widget.CardView>
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

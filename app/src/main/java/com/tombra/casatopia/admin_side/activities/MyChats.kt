@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -21,11 +22,12 @@ import com.tombra.casatopia.admin_side.data.AdminDatabase
 import com.tombra.casatopia.databinding.ActivityChatBinding
 import com.tombra.casatopia.databinding.ActivityMyChatsBinding
 import com.tombra.casatopia.databinding.ActivityUserHomeBinding
+import com.tombra.casatopia.databinding.AdminMychatsBinding
 import com.tombra.casatopia.user_side.data.UserDatabase
 
 class MyChats : Fragment() {
 
-    private var _binding: ActivityMyChatsBinding? = null
+    private var _binding: AdminMychatsBinding? = null
     private val binding get() = _binding!!
 
     private lateinit var chatItemClickListener: (Int) -> Unit
@@ -38,7 +40,7 @@ class MyChats : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = ActivityMyChatsBinding.inflate(inflater, container, false)
+        _binding = AdminMychatsBinding.inflate(inflater, container, false)
 
 
         val context = requireContext()
@@ -65,6 +67,13 @@ class MyChats : Fragment() {
 
 
         adminDatabase.getChatList {
+            binding.progress.isVisible = false
+
+            if(it.isEmpty()){
+                binding.no.isVisible = true
+            }
+
+
             rez = it
             Log.d("ACTIVITY","FINAL")
             chatListAdapter.submitList(it)

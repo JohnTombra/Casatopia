@@ -5,7 +5,10 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.cardview.widget.CardView
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.isVisible
 import com.google.firebase.database.FirebaseDatabase
 import com.tombra.casatopia.R
 import com.tombra.casatopia._model.Admin
@@ -20,21 +23,24 @@ class AUTHENTICATION_ACCOUNT_TYPE_SCREEN : AppCompatActivity() {
         setContentView(R.layout.activity_authentication_account_type_screen)
 
 
+        val loadingScreen = findViewById<ConstraintLayout>(R.id.loadingScreen)
         //check is local is set
 
+        loadingScreen.isVisible = true
         val context: Context = this
 
         val userDatabase = UserDatabase(context)
 
        val accountType = userDatabase.getAuthInfo().accountType
         if(accountType.isBlank()){
+            loadingScreen.isVisible = false
 
             val user = findViewById<CardView>(R.id.userCard)
             val admin = findViewById<CardView>(R.id.adminCard)
             val network: FirebaseDatabase = FirebaseDatabase.getInstance()
 
             user.setOnClickListener {
-
+                loadingScreen.isVisible = true
                 //get the
                 network.reference.child("Accounts").child(userDatabase.getAuthInfo().authId).get().addOnSuccessListener {
                     val result = it.getValue(Signup::class.java)
@@ -43,7 +49,7 @@ class AUTHENTICATION_ACCOUNT_TYPE_SCREEN : AppCompatActivity() {
                         userDatabase.getAuthInfo().authId,
                         result!!.firstName!!,
                         result!!.lastName!!,
-                        "",
+                        "https://firebasestorage.googleapis.com/v0/b/casatopia-c2993.appspot.com/o/images%2F1689783721607?alt=media&token=43f4e898-771c-434c-876f-090d86ce46d7",
                         "Users"
                     )
 
@@ -72,6 +78,7 @@ class AUTHENTICATION_ACCOUNT_TYPE_SCREEN : AppCompatActivity() {
 
                         network.reference.child("Accounts").child(userDatabase.getAuthInfo().authId).setValue(signUp).addOnSuccessListener {
                             startActivity(Intent(context,MyHome::class.java))
+                            Toast.makeText(context,"Account created", Toast.LENGTH_SHORT).show()
                         }
                         //also update accounts
 
@@ -94,7 +101,7 @@ class AUTHENTICATION_ACCOUNT_TYPE_SCREEN : AppCompatActivity() {
                         userDatabase.getAuthInfo().authId,
                         result!!.firstName!!,
                         result!!.lastName!!,
-                        "",
+                        "https://firebasestorage.googleapis.com/v0/b/casatopia-c2993.appspot.com/o/images%2F1689783721607?alt=media&token=43f4e898-771c-434c-876f-090d86ce46d7",
                         "Admins"
                     )
 
@@ -119,8 +126,9 @@ class AUTHENTICATION_ACCOUNT_TYPE_SCREEN : AppCompatActivity() {
                         )
 
                         network.reference.child("Accounts").child(userDatabase.getAuthInfo().authId).setValue(signUp).addOnSuccessListener {
+                            Toast.makeText(context,"Account created", Toast.LENGTH_SHORT).show()
                             startActivity(Intent(context,com.tombra.casatopia.admin_side.activities.MyHome::class.java))}
-                        //go to admin home
+                    //go to admin home
                     }
                 }
 
@@ -157,4 +165,10 @@ class AUTHENTICATION_ACCOUNT_TYPE_SCREEN : AppCompatActivity() {
         }
 
     }
+
+
+    override fun onBackPressed() {
+        moveTaskToBack(true)
+    }
+
 }

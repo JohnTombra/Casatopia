@@ -7,8 +7,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.tombra.casatopia.R
 import com.tombra.casatopia._adapter.SearchItemAdapter
 import com.tombra.casatopia._adapter.TransactionAdapter
 import com.tombra.casatopia._model.Estate
@@ -42,7 +46,11 @@ class MyTransactions : Fragment() {
 
 
 
+        val logo = binding.logo
 
+        logo.setOnClickListener {
+            findNavController().popBackStack()
+        }
 
         //my properties
         //give a complaint
@@ -70,6 +78,13 @@ class MyTransactions : Fragment() {
 
 
         adminDatabase.getTransactionList { result ->
+
+            binding.progress.isVisible = false
+
+            if(result.isEmpty()){
+                binding.no.isVisible = true
+            }
+
             rez = result
             transactionAdapter.submitList(result)
         }

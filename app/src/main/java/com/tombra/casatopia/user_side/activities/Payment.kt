@@ -8,6 +8,8 @@ import android.text.TextWatcher
 import android.util.Log
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.isVisible
 import co.paystack.android.Paystack
 import co.paystack.android.PaystackSdk
 import co.paystack.android.Transaction
@@ -33,6 +35,7 @@ class Payment : AppCompatActivity() {
 
 
 
+    private lateinit var loadingScreen: ConstraintLayout
 
 
 
@@ -49,8 +52,13 @@ class Payment : AppCompatActivity() {
         val totalPriceText = findViewById<TextView>(R.id.totalPrice)
 
 
+        val logo = findViewById<ImageView>(R.id.logo)
 
+        logo.setOnClickListener {
+            onBackPressed()
+        }
 
+        loadingScreen = findViewById<ConstraintLayout>(R.id.loadingScreen)
 
 
 
@@ -98,6 +106,10 @@ class Payment : AppCompatActivity() {
                 }
 
                 Log.d("PAYMENT-PAGE", "Confirm button clicked - 1")
+
+                loadingScreen.isVisible = true
+
+
                 performCharge(estatePrice)
             }
 
@@ -106,7 +118,6 @@ class Payment : AppCompatActivity() {
 
 
             Glide.with(context).load(estateFromRepository.image1)
-                .placeholder(R.drawable.search_icon)
                 .fitCenter()
                 .centerCrop()
                 .into(propertyImage)
@@ -150,59 +161,68 @@ class Payment : AppCompatActivity() {
                         if(durationText.text.toString().isBlank()){1}else{durationText.text.toString().toInt()},
                         userDatabase.getAuthInfo().authId
                     )
-                    val notification = com.tombra.casatopia._model.Notification(
-                        System.currentTimeMillis().toString(),
-                        userDatabase.getAuthInfo().authId,
-                        "Property acquired",
-                        "... has acquired your property for .... months. click to view transaction details"
-                    )
 
-                    val transaction = com.tombra.casatopia._model.Transaction(
-                        System.currentTimeMillis().toString(),
-                        estateFromRepository.estateId!!,
-                    )
+
+                    userDatabase.getUserProfile {
+                        val notification = com.tombra.casatopia._model.Notification(
+                            System.currentTimeMillis().toString(),
+                            userDatabase.getAuthInfo().authId,
+                            "Property acquired",
+                            "${it.userFirstName} ${it.userLastName} has acquired your property for ${durationText.text} years"
+                        )
 
 
 
-                    userDatabase.acquireProperty(
-                        estateFromRepository.estateId!!,
-                        estateFromRepository.adminId!!,
-                        purchase
-                    ) {
-                        Log.d("PAYMENT-PAGE", "Confirm button clicked - 3")
-                        //add user to clients node
-                        //add to transactions
+                        val transaction = com.tombra.casatopia._model.Transaction(
+                            System.currentTimeMillis().toString(),
+                            estateFromRepository.estateId!!,
+                        )
 
-                        userDatabase.sendNotification(
-                            notification,
+
+
+                        userDatabase.acquireProperty(
+                            estateFromRepository.estateId!!,
                             estateFromRepository.adminId!!,
-                            "Admins"
+                            purchase
                         ) {
-                            Log.d("PAYMENT-PAGE", "Confirm button clicked - 4")
-                            //notification success
+                            Log.d("PAYMENT-PAGE", "Confirm button clicked - 3")
+                            //add user to clients node
+                            //add to transactions
 
-                            userDatabase.addTransactionsToAdmin(
-                                transaction,
-                                estateFromRepository.adminId!!
+                            userDatabase.sendNotification(
+                                notification,
+                                estateFromRepository.adminId!!,
+                                "Admins"
                             ) {
-                                Log.d("PAYMENT-PAGE", "Confirm button clicked - 5")
-                                userDatabase.addTransactionsToUser(
+                                Log.d("PAYMENT-PAGE", "Confirm button clicked - 4")
+                                //notification success
+
+                                userDatabase.addTransactionsToAdmin(
                                     transaction,
-                                    userDatabase.getAuthInfo().authId
+                                    estateFromRepository.adminId!!
                                 ) {
-                                    Log.d("PAYMENT-PAGE", "Confirm button clicked - 6")
-                                    userDatabase.addToClientsList(
-                                        estateFromRepository.adminId!!,
+                                    Log.d("PAYMENT-PAGE", "Confirm button clicked - 5")
+                                    userDatabase.addTransactionsToUser(
+                                        transaction,
                                         userDatabase.getAuthInfo().authId
                                     ) {
+                                        Log.d("PAYMENT-PAGE", "Confirm button clicked - 6")
+                                        userDatabase.addToClientsList(
+                                            estateFromRepository.adminId!!,
+                                            userDatabase.getAuthInfo().authId
+                                        ) {
 
                                             Log.d("ACTIVITY","FINALIZED")
+                                            loadingScreen.isVisible = false
+                                            Toast.makeText(context,"Payment successful", Toast.LENGTH_SHORT).show()
+                                            //save to client side
 
-                                        //save to client side
+                                            //success dialog
 
-                                        //success dialog
+                                        }
 
                                     }
+
 
                                 }
 
@@ -210,12 +230,13 @@ class Payment : AppCompatActivity() {
                             }
 
 
+
+
                         }
 
+                    }
 
 
-
-                }
 
             }
 

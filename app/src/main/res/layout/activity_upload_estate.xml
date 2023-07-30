@@ -70,7 +70,7 @@
                 android:id="@+id/image1"
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_marginTop="20dp"
-                android:background="#00bbff"
+                android:background="#444444"
                 android:layout_height="400dp"/>
 
 
@@ -260,6 +260,7 @@
             android:layout_marginLeft="5dp"
             android:layout_marginTop="5dp"
             app:cardCornerRadius="10dp"
+            android:visibility="gone"
             app:cardElevation="5dp"
             android:layout_marginRight="5dp"
             android:layout_width="match_parent"
@@ -268,6 +269,7 @@
                 android:layout_width="match_parent"
                 android:hint="type"
                 android:id="@+id/type"
+                android:text="rent"
                 android:background="#ffffff"
                 android:paddingLeft="10dp"
                 android:layout_height="60dp"/>
@@ -284,7 +286,7 @@
             android:layout_height="wrap_content">
             <androidx.appcompat.widget.AppCompatEditText
                 android:layout_width="match_parent"
-                android:hint="address"
+                android:hint="Address"
                 android:id="@+id/address"
                 android:background="#ffffff"
                 android:paddingLeft="10dp"
@@ -303,6 +305,8 @@
                 android:layout_width="match_parent"
                 android:hint="Price"
                 android:id="@+id/price"
+                android:inputType="number"
+                android:digits="0123456789"
                 android:background="#ffffff"
                 android:paddingLeft="10dp"
                 android:layout_height="60dp"/>
@@ -363,7 +367,7 @@
             android:layout_width="match_parent"
             android:layout_height="300dp"
             tools:context=".admin_side.activities.UploadProperty"
-            tools:layout="@layout/activity_authentication_account_type_screen" />
+            />
 
 
         <androidx.cardview.widget.CardView
@@ -392,5 +396,31 @@
 
 
     </ScrollView>
+
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:id="@+id/loadingScreen"
+        android:visibility="gone"
+        android:layout_height="match_parent">
+
+        <ImageButton
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#000000"
+            android:alpha="0.5"/>
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_height="wrap_content"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

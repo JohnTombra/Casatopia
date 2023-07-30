@@ -12,14 +12,17 @@ import com.tombra.casatopia.R
 import com.tombra.casatopia._model.Admin
 import com.tombra.casatopia._model.Chat
 import com.tombra.casatopia.databinding.ChatItemBinding
+import com.tombra.casatopia.user_side.data.UserDatabase
 
 class ChatListAdapter(val callback: (Int)->Unit) :
     ListAdapter<Admin, ChatListAdapter.ChatViewHolder>(DiffCallBack()) {
 
     lateinit var context: Context
+    lateinit var userDatabase: UserDatabase
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ChatViewHolder {
 
         context = viewGroup.context
+        userDatabase = UserDatabase(context)
         val inflater = LayoutInflater.from(context)
         val binding = ChatItemBinding.inflate(inflater, viewGroup, false)
         return ChatViewHolder(binding)
@@ -27,13 +30,29 @@ class ChatListAdapter(val callback: (Int)->Unit) :
 
     override fun onBindViewHolder(holder: ChatViewHolder, position: Int) {
 
+
+
         with(holder) {
             with(getItem(position)) {
+
+                binding.bubbleCard.isVisible = false
+                binding.bubbleText.text = ""
+
+                userDatabase.listenForSingleUnread(adminId) {data1, data2 ->
+                    if (data2 > 0) {
+                        binding.bubbleCard.isVisible = true
+                        binding.bubbleText.text = (data2).toString()
+
+                    } else {
+                        binding.bubbleCard.isVisible = false
+                        binding.bubbleText.text = ""
+                    }
+                }
+
 
                 binding.name.text = "${firstName!!} ${lastName!!}"
 
                 Glide.with(context).load(imageLink)
-                    .placeholder(R.drawable.search_icon)
                     .fitCenter()
                     .centerCrop()
                     .into(binding.image)

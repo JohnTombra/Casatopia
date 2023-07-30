@@ -24,6 +24,7 @@ import kotlinx.coroutines.withContext
 class ChatWithClient : AppCompatActivity() {
     private lateinit var context: Context
 
+    var active = false
 
     protected override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -77,7 +78,6 @@ class ChatWithClient : AppCompatActivity() {
              CoroutineScope(Dispatchers.Main).launch {
                 adminName.text = "${admin.userFirstName} ${admin.userLastName}"
                 Glide.with(context).load(admin.userImageLink)
-                    .placeholder(R.drawable.search_icon)
                     .fitCenter()
                     .centerCrop()
                     .into(adminImage)
@@ -120,6 +120,32 @@ class ChatWithClient : AppCompatActivity() {
 //
 
 
+
+        adminDatabase.checkTotal(userId) {x,y ->
+            if (active) {
+                adminDatabase.updateRead(x,y)
+            }
+        }
+
+
+
     } //transactions layout should contain
     //description of service offerred and the price and a button for pay and
+
+
+    override fun onStart() {
+        super.onStart()
+        active = true
+    }
+
+
+
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        active = false
+    }
+
+
+
 }

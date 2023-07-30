@@ -58,7 +58,6 @@ class TransactionAdapter(val callback: (Int)-> Unit) :
                     }
 
                     Glide.with(context).load(estate.image1)
-                        .placeholder(R.drawable.search_icon)
                         .fitCenter()
                         .centerCrop()
                         .into(binding.image)

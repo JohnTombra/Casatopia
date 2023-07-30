@@ -21,11 +21,14 @@
         android:id="@+id/myTransactions"
         android:name="com.tombra.casatopia.admin_side.activities.MyTransactions"
         android:label="activity_transactions"
-        tools:layout="@layout/activity_transactions" /><action android:id="@+id/action_global_myTransactions" app:destination="@id/myTransactions"/>
+        tools:layout="@layout/activity_transactions" >
+        <action
+            android:id="@+id/action_myTransactions_to_myChats2"
+            app:destination="@id/myChats2" />
+    </fragment><action android:id="@+id/action_global_myTransactions" app:destination="@id/myTransactions"/>
     <action android:id="@+id/action_global_adminHome" app:destination="@id/adminHome" />
     <fragment
         android:id="@+id/myChats2"
-        android:name="com.tombra.casatopia.user_side.activities.MyChats"
-        android:label="activity_my_chats"
-        tools:layout="@layout/activity_my_chats" /><action android:id="@+id/action_global_myChats2" app:destination="@id/myChats2"/>
+        android:name="com.tombra.casatopia.admin_side.activities.MyChats"
+        android:label="MyChats" /><action android:id="@+id/action_global_myChats2" app:destination="@id/myChats2"/>
 </navigation>

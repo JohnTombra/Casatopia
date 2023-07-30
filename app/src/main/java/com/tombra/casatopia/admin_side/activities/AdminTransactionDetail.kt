@@ -39,6 +39,12 @@ class AdminTransactionDetail : AppCompatActivity(), OnMapReadyCallback {
 
         Log.d("FRAGMENT", "INSIDE...")
 
+        val logo = findViewById<ImageView>(R.id.logo)
+
+        logo.setOnClickListener {
+            onBackPressed()
+        }
+
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map2) as SupportMapFragment
         mapFragment.getMapAsync(this)
@@ -77,7 +83,7 @@ class AdminTransactionDetail : AppCompatActivity(), OnMapReadyCallback {
             val eName = estateFromRepository.estateName
 
             Glide.with(context).load(eImageLink)
-                .placeholder(R.drawable.search_icon)
+
                 .fitCenter()
                 .centerCrop()
                 .into(estateImage)

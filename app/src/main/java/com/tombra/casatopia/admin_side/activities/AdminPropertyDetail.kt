@@ -48,6 +48,11 @@ class AdminPropertyDetail : AppCompatActivity(), OnMapReadyCallback {
         mapFragment.getMapAsync(this)
         //there will be a map here
 
+        val logo = findViewById<ImageView>(R.id.logo)
+
+        logo.setOnClickListener {
+            onBackPressed()
+        }
 
         val estateImage = findViewById<ImageView>(R.id.image)
         val estateName = findViewById<TextView>(R.id.name)
@@ -85,7 +90,6 @@ class AdminPropertyDetail : AppCompatActivity(), OnMapReadyCallback {
             val eName = estateFromRepository.estateName
 
             Glide.with(context).load(eImageLink)
-                .placeholder(R.drawable.search_icon)
                 .fitCenter()
                 .centerCrop()
                 .into(estateImage)

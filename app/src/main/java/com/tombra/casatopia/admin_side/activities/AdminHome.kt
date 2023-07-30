@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tombra.casatopia.R
@@ -57,7 +58,7 @@ class AdminHome : Fragment() {
 
 
         binding.dashboardIcon.setOnClickListener {
-            startActivity(Intent(context, AdminProfile::class.java))
+            startActivity(Intent(context, AdminDashboard::class.java))
         }
 
         val estatesAdapter = SearchItemAdapter(estateClickListener)
@@ -70,6 +71,14 @@ class AdminHome : Fragment() {
 
 
         adminDatabase.getAllEstates { resultFromRepository ->
+
+
+            binding.progress.isVisible = false
+
+            if(resultFromRepository.isEmpty()){
+                binding.no.isVisible = true
+            }
+
             rez = resultFromRepository
             estatesAdapter.submitList(resultFromRepository)
         }

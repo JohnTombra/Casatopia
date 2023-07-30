@@ -77,10 +77,9 @@
 
                         <androidx.appcompat.widget.AppCompatImageView
                             android:layout_width="match_parent"
-                            android:background="#222222"
+                            android:background="#F4F4F4"
                             android:id="@+id/image"
                             android:scaleType="center"
-                            android:src="@drawable/ship"
                             android:layout_height="300dp"/>
 
                     </androidx.cardview.widget.CardView>
@@ -92,7 +91,7 @@
                         android:textColor="#222222"
                         android:textStyle="bold"
                         android:layout_height="wrap_content"
-                        android:text="Great White Double Height House"
+                        android:text="..."
                         app:layout_constraintLeft_toLeftOf="@id/imageCont"
                         app:layout_constraintTop_toBottomOf="@+id/imageCont"
                         android:id="@+id/name"/>
@@ -102,7 +101,7 @@
                         android:layout_width="wrap_content"
                         android:textSize="15dp"
                         android:layout_height="wrap_content"
-                        tools:text="10000"
+                        tools:text="..."
                         android:textStyle="bold"
                         android:layout_marginRight="10dp"
                         android:textColor="#666666"
@@ -135,7 +134,7 @@
                         android:textColor="#666666"
                         app:layout_constraintTop_toBottomOf="@+id/name"
                         android:layout_height="wrap_content"
-                        android:text="3891 Ranchview Dr.Richardson, California"
+                        android:text="..."
                         app:layout_constraintLeft_toLeftOf="@id/name"
                         android:id="@+id/address"/>
 
@@ -393,7 +392,7 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="500dp">
+                    android:layout_height="180dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"

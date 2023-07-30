@@ -34,7 +34,6 @@ class ChatListAdminAdapter(val callback: (Int)->Unit) :
                 binding.name.text = "${userFirstName!!} ${userLastName!!}"
 
                 Glide.with(context).load(userImageLink)
-                    .placeholder(R.drawable.search_icon)
                     .fitCenter()
                     .centerCrop()
                     .into(binding.image)

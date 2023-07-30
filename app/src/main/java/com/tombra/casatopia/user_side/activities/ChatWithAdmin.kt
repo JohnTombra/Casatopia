@@ -22,7 +22,7 @@ import kotlinx.coroutines.withContext
 
 class ChatWithAdmin : AppCompatActivity() {
     private lateinit var context: Context
-
+    var active = false
 
     protected override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,6 +63,9 @@ class ChatWithAdmin : AppCompatActivity() {
         }
 
 
+
+
+
         userDatabase.getChats(adminId){ chats ->
             chatsAdapter.submitList(chats)
         }
@@ -74,7 +77,6 @@ class ChatWithAdmin : AppCompatActivity() {
              CoroutineScope(Dispatchers.Main).launch {
                 adminName.text = "${admin.firstName} ${admin.lastName}"
                 Glide.with(context).load(admin.imageLink)
-                    .placeholder(R.drawable.search_icon)
                     .fitCenter()
                     .centerCrop()
                     .into(adminImage)
@@ -110,6 +112,18 @@ class ChatWithAdmin : AppCompatActivity() {
             }
         }
 
+
+
+
+        userDatabase.checkTotal(adminId) {x,y ->
+            if (active) {
+                userDatabase.updateRead(x,y)
+            }
+        }
+
+
+
+
 //
 //
 //
@@ -117,4 +131,24 @@ class ChatWithAdmin : AppCompatActivity() {
 
     } //transactions layout should contain
     //description of service offerred and the price and a button for pay and
+
+
+
+    override fun onStart() {
+        super.onStart()
+        active = true
+    }
+
+
+
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        active = false
+    }
+
+
+    //if page is active set read as same if total changes
+
+
 }
