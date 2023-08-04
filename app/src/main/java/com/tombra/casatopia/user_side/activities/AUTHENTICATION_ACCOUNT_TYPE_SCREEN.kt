@@ -50,7 +50,9 @@ class AUTHENTICATION_ACCOUNT_TYPE_SCREEN : AppCompatActivity() {
                         result!!.firstName!!,
                         result!!.lastName!!,
                         "https://firebasestorage.googleapis.com/v0/b/casatopia-c2993.appspot.com/o/images%2F1689783721607?alt=media&token=43f4e898-771c-434c-876f-090d86ce46d7",
-                        "Users"
+                        "Users",
+                        email =  result!!.email!!,
+                                phoneNumber =  result!!.phoneNumber!!,
                     )
 
 
@@ -73,7 +75,9 @@ class AUTHENTICATION_ACCOUNT_TYPE_SCREEN : AppCompatActivity() {
                             true,
                             "Users",
                             result.firstName,
-                            result.lastName
+                            result.lastName,
+                            result.email,
+                            result.phoneNumber,
                         )
 
                         network.reference.child("Accounts").child(userDatabase.getAuthInfo().authId).setValue(signUp).addOnSuccessListener {
@@ -102,7 +106,9 @@ class AUTHENTICATION_ACCOUNT_TYPE_SCREEN : AppCompatActivity() {
                         result!!.firstName!!,
                         result!!.lastName!!,
                         "https://firebasestorage.googleapis.com/v0/b/casatopia-c2993.appspot.com/o/images%2F1689783721607?alt=media&token=43f4e898-771c-434c-876f-090d86ce46d7",
-                        "Admins"
+                        "Admins",
+                        email =  result.email!!,
+                        phoneNumber =  result!!.phoneNumber!!,
                     )
 
                     network.reference.child("Admins").child(userDatabase.getAuthInfo().authId).child("Profile").setValue(admin).addOnSuccessListener {
@@ -122,7 +128,9 @@ class AUTHENTICATION_ACCOUNT_TYPE_SCREEN : AppCompatActivity() {
                             true,
                             "Admins",
                         result.firstName,
-                            result.lastName
+                            result.lastName,
+                            email =  result!!.email!!,
+                            phoneNumber =  result!!.phoneNumber!!,
                         )
 
                         network.reference.child("Accounts").child(userDatabase.getAuthInfo().authId).setValue(signUp).addOnSuccessListener {

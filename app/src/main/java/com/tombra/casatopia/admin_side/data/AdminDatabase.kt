@@ -3,6 +3,7 @@ package com.tombra.casatopia.admin_side.data
 import android.content.Context
 import android.content.SharedPreferences
 import android.util.Log
+import android.widget.Toast
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -40,6 +41,44 @@ class AdminDatabase(private val context: Context) {
         }
     }
 
+
+
+    fun listenForBalance(adminId:String, callback: (Int) -> Unit){
+        network.reference.child("Admins/$adminId/wallet").addValueEventListener(object: ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if(!snapshot.exists()){
+                    callback(0)
+                    return
+                }
+               callback(snapshot.getValue(Int::class.java)!!)
+            }
+            override fun onCancelled(error: DatabaseError) {
+            }
+        })
+    }
+
+
+    fun makeWithdrawal(adminId:String, amount: Int, withdrawal: Withdrawal, callback: () -> Unit){
+        network.reference.child("Admins/$adminId/wallet").get().addOnSuccessListener {
+
+            val old = it.getValue(Int::class.java)!!
+
+            if(amount > old){
+                Toast.makeText(context,"Insufficient funds",Toast.LENGTH_SHORT).show()
+                return@addOnSuccessListener
+            }
+
+            val new = old - amount
+            network.reference.child("Admins/$adminId/wallet").setValue(new).addOnSuccessListener {
+                //save to core
+                network.reference.child("Core/withdrawals/${withdrawal.timestamp}").setValue(withdrawal).addOnSuccessListener {
+                    callback()
+                }
+
+            }
+        }
+    }
+
     //
 //
     fun getAuthInfo(): Auth {
@@ -67,6 +106,42 @@ class AdminDatabase(private val context: Context) {
 
 
     }
+
+
+    fun acknowledge(url1: String, url2: String,submit: () -> Unit) {
+        network.reference.child(url1).setValue(true).addOnSuccessListener {
+            network.reference.child(url2).setValue(true).addOnSuccessListener {
+                submit()
+            }
+        }
+    }
+
+
+    fun getMaintenance(submit: (List<Maintenance>) -> Unit) {
+        //   Log.d("REPOSITORY", "Listening.......2")
+        network.reference.child("Admins").child(getAuthInfo().authId).child("Maintenance")
+            .addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    var admins = listOf<Maintenance>()
+                    //    Log.d("REPOSITORY", "Listening.......3")
+                    for (recipient in snapshot.children) {
+                        //        Log.d("REPOSITORY", "Listening.......3x")
+
+                        admins += recipient.getValue(Maintenance::class.java)!!
+
+                    }
+
+                    //   Log.d("Repository", "Getting list - 3 $admins")
+                    submit(admins)
+
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    TODO("Not yet implemented")
+                }
+            })
+    }
+
 
 
     fun getAllClients(submit: (List<User>) -> Unit) {
@@ -141,7 +216,8 @@ class AdminDatabase(private val context: Context) {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     var chats = listOf<Chat>()
                     for (chat in snapshot.children) {
-                        chats += chat.getValue(Chat::class.java)!!
+                        if (!chat.key.equals("read") && !chat.key.equals("total")) {
+                        chats += chat.getValue(Chat::class.java)!!}
                     }
                     submit(chats)
                 }
@@ -280,7 +356,8 @@ class AdminDatabase(private val context: Context) {
                     Log.d("Repository", "Getting list -2")
                     var admins = listOf<User>()
                     for (recipient in snapshot.children) {
-                        admins += getClientProfile(recipient.key!!, {})
+                        if (!recipient.key.equals("read") && !recipient.key.equals("total")) {
+                        admins += getClientProfile(recipient.key!!, {})}
                     }
 
                     Log.d("Repository", "Getting list - 3 $admins")
@@ -412,7 +489,7 @@ class AdminDatabase(private val context: Context) {
     }
 
     fun updateRead(chatId: String,toInt: Int){
-        network.reference.child("Users/${getAuthInfo().authId}/Chats/${chatId}/read").setValue(toInt)
+        network.reference.child("Admins/${getAuthInfo().authId}/Chats/${chatId}/read").setValue(toInt)
     }
 
 

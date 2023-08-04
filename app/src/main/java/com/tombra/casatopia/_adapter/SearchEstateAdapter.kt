@@ -1,6 +1,7 @@
 package com.tombra.casatopia._adapter
 
 import android.content.Context
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -29,6 +30,14 @@ class SearchItemAdapter(val callback: (Int) -> Unit) :
     override fun onBindViewHolder(holder: EstateViewHolder, position: Int) {
         with(holder) {
             with(getItem(position)) {
+
+                binding.image.setBackgroundColor(Color.BLACK)
+                binding.name.text =""
+                binding.address.text = ""
+                binding.price.text = ""
+
+
+
                 binding.name.text = estateName
                 binding.address.text = address
                 binding.price.text = "\u20A6 $price"

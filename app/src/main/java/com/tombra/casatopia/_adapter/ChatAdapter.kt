@@ -24,8 +24,15 @@ class ChatAdapter(val userId: String) :
 
 
 
+
         with(holder) {
             with(getItem(position)) {
+
+                binding.textLeftCard.isVisible = false
+                binding.textRightCard.isVisible = false
+                binding.textRight.text = ""
+                binding.textLeft.text = ""
+
 
 
                 val text = message

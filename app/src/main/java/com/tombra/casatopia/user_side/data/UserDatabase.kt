@@ -52,6 +52,32 @@ class UserDatabase(private val context: Context) {
     }
 
 
+
+    fun updateWallet(adminId: String, price: Int){
+        network.reference.child("Admins/$adminId/wallet").get().addOnSuccessListener {
+
+            Log.d("ACTIVITY","UPDATING WALLET")
+
+            if(!it.exists()){
+                Log.d("ACTIVITY","UPDATING WALLET - 1")
+                val old = 0
+                val new = old + price
+                network.reference.child("Admins/$adminId/wallet").setValue(new)
+                return@addOnSuccessListener
+            }
+            Log.d("ACTIVITY","UPDATING WALLET - 2 ${price}")
+            Log.d("ACTIVITY","UPDATING WALLET - 2 ${it.getValue(Int::class.java)!!}")
+            val old = it.getValue(Int::class.java)!!
+            val new = old + price
+            network.reference.child("Admins/$adminId/wallet").setValue(new).addOnSuccessListener {
+                Log.d("ACTIVITY","UPDATING WALLET - 2 ${new}")
+            }
+
+
+        }
+    }
+
+
     fun getAllEstates(submit: (List<Estate>) -> Unit) {
         //for each admin
         //that is available
@@ -80,6 +106,10 @@ class UserDatabase(private val context: Context) {
 
 
     }
+
+
+
+
 
     //
     fun getSingleEstate(estateId: String, submit: (Estate) -> Unit) {
@@ -250,6 +280,39 @@ class UserDatabase(private val context: Context) {
     }
 
 
+
+
+
+    fun getMaintenance(submit: (List<Maintenance>) -> Unit) {
+        //   Log.d("REPOSITORY", "Listening.......2")
+        network.reference.child("Users").child(getAuthInfo().authId).child("Maintenance")
+            .addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    var admins = listOf<Maintenance>()
+                    //    Log.d("REPOSITORY", "Listening.......3")
+                    for (recipient in snapshot.children) {
+                        //        Log.d("REPOSITORY", "Listening.......3x")
+
+                            admins += recipient.getValue(Maintenance::class.java)!!
+
+                    }
+
+                    //   Log.d("Repository", "Getting list - 3 $admins")
+                    submit(admins)
+
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    TODO("Not yet implemented")
+                }
+            })
+    }
+
+
+
+
+
+
     fun getChatListOneShot(submit: (List<Admin>) -> Unit) {
         Log.d("REPOSITORY", "Listening.......2")
         network.reference.child("Users").child(getAuthInfo().authId).child("Chats").get()
@@ -289,6 +352,27 @@ class UserDatabase(private val context: Context) {
 
                 override fun onCancelled(error: DatabaseError) {
                     TODO("Not yet implemented")
+                }
+            })
+    }
+
+
+    fun getWithdrawals(submit: (List<Withdrawal>) -> Unit) {
+        //   Log.d("Repository", "Getting list - 1")
+        network.reference.child("Core/withdrawals")
+            .addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    //    Log.d("Repository", "Getting list -2")
+                    var transactions = listOf<Withdrawal>()
+                    for (transaction in snapshot.children) {
+                        transactions += transaction.getValue(Withdrawal::class.java)!!
+                    }
+                    //   Log.d("Repository", "Getting list - 3 $transactions")
+                    submit(transactions)
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+
                 }
             })
     }
@@ -382,6 +466,21 @@ class UserDatabase(private val context: Context) {
                         }
                     }
                 submit()
+            }
+    }
+
+
+
+    fun sendMaintenanceRequest(maintenance: Maintenance, submit: () -> Unit) {
+        network.reference.child("Admins").child(maintenance.receiver).child("Maintenance")
+            .child(maintenance.timestamp).setValue(maintenance).addOnSuccessListener {
+                //send to admin too
+                //update total
+                network.reference.child("Users").child(maintenance.sender).child("Maintenance")
+                    .child(maintenance.timestamp)
+                    .setValue(maintenance).addOnSuccessListener {
+                        submit()
+                    }
             }
     }
 //

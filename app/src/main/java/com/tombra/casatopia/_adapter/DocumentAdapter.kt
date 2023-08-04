@@ -34,6 +34,9 @@ class DocumentAdapter(val callback: (Int) -> Unit) :
 
         with(holder) {
             with(getItem(position)) {
+
+                binding.name.text = ""
+
                 binding.name.text = "Pdf: $name"
             }
         }

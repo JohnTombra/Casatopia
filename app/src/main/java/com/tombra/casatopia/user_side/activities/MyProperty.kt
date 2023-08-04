@@ -6,9 +6,13 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
+import android.widget.Toast
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.isVisible
 import com.bumptech.glide.Glide
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -17,6 +21,7 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.tombra.casatopia.R
+import com.tombra.casatopia._model.Maintenance
 import com.tombra.casatopia.user_side.data.UserDatabase
 
 class MyProperty : AppCompatActivity(), OnMapReadyCallback {
@@ -34,7 +39,6 @@ class MyProperty : AppCompatActivity(), OnMapReadyCallback {
         val estateId = intent.extras!!.getString("estateId").toString()
         var context: Context = this
         var userDatabase = UserDatabase(context)
-
 
 
         val mapFragment = supportFragmentManager
@@ -57,7 +61,13 @@ class MyProperty : AppCompatActivity(), OnMapReadyCallback {
         val viewFullMap = findViewById<TextView>(R.id.mappp)
         val duration = findViewById<TextView>(R.id.duration)
         val ownerShipDocument = findViewById<TextView>(R.id.ownershipDocument)
+        val maintenanceRequestContainer =
+            findViewById<ConstraintLayout>(R.id.maintenanceRequestContainer)
+        val cancel = findViewById<TextView>(R.id.cancel)
+        val requestDescription = findViewById<EditText>(R.id.requestDescription)
+        val sendRequest = findViewById<TextView>(R.id.sendRequest)
 
+        val loadingScreen = findViewById<ConstraintLayout>(R.id.loadingScreen)
         val owner = findViewById<TextView>(R.id.owner)
         val type = findViewById<TextView>(R.id.type)
 
@@ -76,7 +86,7 @@ class MyProperty : AppCompatActivity(), OnMapReadyCallback {
         Log.d("ACTIVITY", estateId)
 
 
-        userDatabase.getSingleEstate(estateId){ estateFromRepository ->
+        userDatabase.getSingleEstate(estateId) { estateFromRepository ->
 
             val eImageLink = estateFromRepository.image1
             val eName = estateFromRepository.estateName
@@ -94,7 +104,7 @@ class MyProperty : AppCompatActivity(), OnMapReadyCallback {
             state.text = "State: ${estateFromRepository.state}"
             city.text = "City: ${estateFromRepository.city}"
             type.text = "Ownership type: ${estateFromRepository.type}"
-            duration.text = "Duration: ${estateFromRepository.purchase!!.duration} months"
+            duration.text = "Duration: ${estateFromRepository.purchase!!.duration} years"
 
 
             bedrooms.text = "${estateFromRepository.bedrooms} Bedrooms"
@@ -125,12 +135,57 @@ class MyProperty : AppCompatActivity(), OnMapReadyCallback {
             val estateReferenceId = estateFromRepository.estateId
 
             ownerProfile.setOnClickListener {
-                startActivity(Intent(context, AdminProfile::class.java).putExtra("adminId",estateFromRepository.adminId).putExtra("estateReferenceId",estateReferenceId))
+                startActivity(
+                    Intent(context, AdminProfile::class.java).putExtra(
+                        "adminId",
+                        estateFromRepository.adminId
+                    ).putExtra("estateReferenceId", estateReferenceId)
+                )
             }
 
 
             complaint.setOnClickListener {
-                startActivity(Intent(context, ChatWithAdmin::class.java).putExtra("adminId",estateFromRepository.adminId))
+                maintenanceRequestContainer.isVisible = true
+            }
+
+            cancel.setOnClickListener {
+                maintenanceRequestContainer.isVisible = false
+            }
+
+
+
+
+
+            sendRequest.setOnClickListener {
+
+                if (requestDescription.text.toString().isBlank()) {
+                    Toast.makeText(context, "Request cannot be empty", Toast.LENGTH_SHORT)
+                    return@setOnClickListener
+                }
+
+                //show loading layout
+
+                loadingScreen.isVisible = true
+
+                val maintenance = Maintenance(
+                    System.currentTimeMillis().toString(),
+                    requestDescription.text.toString(),
+                    userDatabase.getAuthInfo().authId,
+                    estateFromRepository.adminId!!,
+                    estateFromRepository.estateId!!,
+                    false
+                )
+
+                userDatabase.sendMaintenanceRequest(maintenance) {
+                    requestDescription.setText("")
+                    maintenanceRequestContainer.isVisible = false
+                    loadingScreen.isVisible = false
+                    Toast.makeText(context,"Sent", Toast.LENGTH_SHORT).show()
+                    startActivity(Intent(context, MaintenanceActivity::class.java))
+                    //move to maintenance list activity
+                }
+
+
             }
 
 
@@ -138,7 +193,12 @@ class MyProperty : AppCompatActivity(), OnMapReadyCallback {
 
 
             viewFullMap.setOnClickListener {
-                startActivity(Intent(context, FullMap::class.java).putExtra("latitude",estateFromRepository.location!!.latitude).putExtra("longitude",estateFromRepository.location!!.longitude))
+                startActivity(
+                    Intent(context, FullMap::class.java).putExtra(
+                        "latitude",
+                        estateFromRepository.location!!.latitude
+                    ).putExtra("longitude", estateFromRepository.location!!.longitude)
+                )
             }
 
         }
@@ -146,9 +206,8 @@ class MyProperty : AppCompatActivity(), OnMapReadyCallback {
     }
 
 
-
-    fun retrievePdf(uri: String){
-        startActivity(Intent(Intent.ACTION_VIEW).setType("application/pdf").setData(Uri.parse(uri)) )
+    fun retrievePdf(uri: String) {
+        startActivity(Intent(Intent.ACTION_VIEW).setType("application/pdf").setData(Uri.parse(uri)))
     }
 
 

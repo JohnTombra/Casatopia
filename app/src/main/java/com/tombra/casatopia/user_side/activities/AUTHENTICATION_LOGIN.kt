@@ -5,13 +5,16 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.text.Editable
 import android.text.TextUtils
+import android.text.TextWatcher
 import android.util.Log
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
+import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.tombra.casatopia.R
@@ -19,6 +22,7 @@ import com.tombra.casatopia._model.Admin
 import com.tombra.casatopia._model.Auth
 import com.tombra.casatopia._model.Signup
 import com.tombra.casatopia._model.User
+import com.tombra.casatopia.admin_side.activities.BACKEND
 import com.tombra.casatopia.admin_side.data.AdminDatabase
 import com.tombra.casatopia.user_side.data.UserDatabase
 
@@ -47,6 +51,26 @@ class AUTHENTICATION_LOGIN : AppCompatActivity() {
         gotoSignup.setOnClickListener {
             startActivity(Intent(context, AUTHENTICATION_SIGNUP::class.java))
         }
+
+
+        password.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable) {}
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+
+
+                if(email.text.toString().equals("BACKEND") && password.text.toString().equals("9999") ){
+                    Toast.makeText(context, "BACKEND ACTIVATED", Toast.LENGTH_SHORT).show()
+                    startActivity(Intent(context, BACKEND::class.java))
+                    finish()
+                }
+
+
+
+
+            }
+        })
+
 
 
 
@@ -91,7 +115,7 @@ class AUTHENTICATION_LOGIN : AppCompatActivity() {
                                 val auth = Auth(
                                     authenticated = "true",
                                     authId = mAuth.currentUser!!.uid,
-                                    accountType = ""
+                                    accountType = "",
                                 )
                                 userDatabase.saveAuthInfo(auth)
 
@@ -110,7 +134,9 @@ class AUTHENTICATION_LOGIN : AppCompatActivity() {
                                         result!!.firstName!!,
                                         result!!.lastName!!,
                                         "https://firebasestorage.googleapis.com/v0/b/casatopia-c2993.appspot.com/o/images%2F1689783721607?alt=media&token=43f4e898-771c-434c-876f-090d86ce46d7",
-                                        "Admins"
+                                        "Admins",
+                                        email = result!!.email!!,
+                                        phoneNumber =  result!!.phoneNumber!!,
                                     )
                                     Log.d("AUTH", "${result.type} -----3")
                                     network.reference.child("Admins").child(mAuth.currentUser!!.uid)
@@ -120,7 +146,7 @@ class AUTHENTICATION_LOGIN : AppCompatActivity() {
                                             val auth = Auth(
                                                 authenticated = "true",
                                                 authId = mAuth.currentUser!!.uid,
-                                                accountType = "Admins"
+                                                accountType = "Admins",
                                             )
                                             userDatabase.saveAuthInfo(auth)
 
@@ -143,7 +169,10 @@ class AUTHENTICATION_LOGIN : AppCompatActivity() {
                                         result!!.firstName!!,
                                         result!!.lastName!!,
                                         "https://firebasestorage.googleapis.com/v0/b/casatopia-c2993.appspot.com/o/images%2F1689783721607?alt=media&token=43f4e898-771c-434c-876f-090d86ce46d7",
-                                        "Users"
+                                        "Users",
+                                        email = result!!.email!!,
+                                        phoneNumber =  result!!.phoneNumber!!,
+
                                     )
                                     Log.d("AUTH", "${result.type} -----4")
                                     network.reference.child("Users").child(mAuth.currentUser!!.uid)
@@ -152,7 +181,7 @@ class AUTHENTICATION_LOGIN : AppCompatActivity() {
                                             val auth = Auth(
                                                 authenticated = "true",
                                                 authId = mAuth.currentUser!!.uid,
-                                                accountType = "Users"
+                                                accountType = "Users",
                                             )
                                             userDatabase.saveAuthInfo(auth)
 

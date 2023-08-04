@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -37,11 +38,27 @@ class AdminDashboard : AppCompatActivity() {
         val notifications = findViewById<TextView>(R.id.notifications)
         val clients = findViewById<TextView>(R.id.clients)
         val logout = findViewById<TextView>(R.id.logout)
+        val wallet = findViewById<TextView>(R.id.wallet)
 
         val logOutLayout = findViewById<ConstraintLayout>(R.id.logOutLayout)
         val logOut = findViewById<TextView>(R.id.logOut)
         val close = findViewById<TextView>(R.id.close)
 
+        val maintenance = findViewById<Button>(R.id.maintenance)
+
+
+
+
+        wallet.setOnClickListener {
+            startActivity(Intent(context,Wallet::class.java))
+        }
+
+
+
+
+        maintenance.setOnClickListener {
+            startActivity(Intent(context,MaintenanceActivity::class.java))
+        }
 
 
 

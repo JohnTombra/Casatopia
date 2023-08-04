@@ -62,9 +62,18 @@ class Profile : Fragment() {
             }
         }
 
+
+
+        binding.maintenance.setOnClickListener {
+            startActivity(Intent(context, MaintenanceActivity::class.java))
+        }
+
         userDatabase.getUserProfile{ userFromRepository ->
 
             binding.progress.isVisible = false
+
+            binding.email.text = userFromRepository.email
+            binding.phoneNumber.text = userFromRepository.phoneNumber
 
             Glide.with(context).load(userFromRepository.userImageLink)
                 .fitCenter()

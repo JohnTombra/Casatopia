@@ -5,5 +5,7 @@ data class Admin(
     val firstName: String = "",
     val lastName: String = "",
     val imageLink: String = "",
-    val type: String = ""
+    val type: String = "",
+    val email: String = "",
+    val phoneNumber: String = ""
     )

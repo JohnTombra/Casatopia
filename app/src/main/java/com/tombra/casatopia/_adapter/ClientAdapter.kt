@@ -1,6 +1,7 @@
 package com.tombra.casatopia._adapter
 
 import android.content.Context
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isVisible
@@ -34,6 +35,9 @@ class ClientAdapter(val callback: (Int)-> Unit) :
 
         with(holder) {
             with(getItem(position)) {
+
+                binding.name.text = ""
+                binding.image.setBackgroundColor(Color.BLACK)
 
 
                 binding.name.text = "$userFirstName $userLastName"

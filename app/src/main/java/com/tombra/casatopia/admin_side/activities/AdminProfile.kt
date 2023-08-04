@@ -86,6 +86,8 @@ class AdminProfile : AppCompatActivity() {
                     .fitCenter()
                     .centerCrop()
                     .into(adminImage)
+            findViewById<TextView>(R.id.email).text = admin.email
+            findViewById<TextView>(R.id.phoneNumber).text = admin.phoneNumber
         }
 
 

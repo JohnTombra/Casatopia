@@ -19,7 +19,25 @@
         android:theme="@style/Theme.Casatopia"
         tools:targetApi="31">
         <activity
+            android:name=".user_side.activities.MyPropertiesActivity"
+            android:exported="false" />
+
+        <activity android:name=".admin_side.activities.Wallet"
+            android:exported="false"
+            />
+
+        <activity android:name=".admin_side.activities.BACKEND"
+            android:exported="false"
+            />
+
+        <activity
             android:name=".admin_side.activities.DocumentsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".user_side.activities.MaintenanceActivity"
+            android:exported="false" />
+        <activity
+            android:name=".admin_side.activities.MaintenanceActivity"
             android:exported="false" />
         <activity
             android:name=".admin_side.activities.MyClientsActivity"

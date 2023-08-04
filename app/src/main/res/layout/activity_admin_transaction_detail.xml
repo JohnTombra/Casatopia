@@ -42,7 +42,7 @@
                 android:textStyle="bold"
                 android:textSize="19dp"
                 android:layout_height="wrap_content"
-                android:text="Estate Detail"/>
+                android:text="Property Detail"/>
 
 
             <androidx.cardview.widget.CardView

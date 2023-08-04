@@ -44,6 +44,7 @@ class AUTHENTICATION_SIGNUP : AppCompatActivity() {
         val firstName = findViewById<EditText>(R.id.firstName)
         val lastName = findViewById<EditText>(R.id.lastName)
         val signup = findViewById<TextView>(R.id.signup)
+        val phoneNumber = findViewById<EditText>(R.id.phoneNumber)
 
         val gotoLogin = findViewById<TextView>(R.id.login)
 
@@ -108,7 +109,9 @@ class AUTHENTICATION_SIGNUP : AppCompatActivity() {
                             false,
                             "",
                             firstName.text.toString(),
-                            lastName.text.toString()
+                            lastName.text.toString(),
+                            email.text.toString(),
+                            phoneNumber.text.toString()
                         )
 
                         network.reference.child("Accounts").child(mAuth.currentUser!!.uid)

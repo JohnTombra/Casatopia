@@ -47,6 +47,8 @@ class ClientProfile : AppCompatActivity() {
 
             CoroutineScope(Dispatchers.Main).launch {
 
+                findViewById<TextView>(R.id.email).text = userFromRepository.email
+                findViewById<TextView>(R.id.phoneNumber).text = userFromRepository.phoneNumber
 
                 Glide.with(context).load(userFromRepository.userImageLink)
                     .fitCenter()

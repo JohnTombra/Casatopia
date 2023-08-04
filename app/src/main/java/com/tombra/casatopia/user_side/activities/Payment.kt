@@ -2,12 +2,14 @@ package com.tombra.casatopia.user_side.activities
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
 import co.paystack.android.Paystack
@@ -34,10 +36,15 @@ class Payment : AppCompatActivity() {
     private lateinit var finalize: () -> Unit
 
 
+    private var totalPrice: Int = 0
+
 
     private lateinit var loadingScreen: ConstraintLayout
 
+    private lateinit var purchaseCompleteCard: CardView
 
+
+    var purchased = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,6 +57,8 @@ class Payment : AppCompatActivity() {
         durationText = findViewById(R.id.duration)
         val priceText = findViewById<TextView>(R.id.propertyPrice)
         val totalPriceText = findViewById<TextView>(R.id.totalPrice)
+        purchaseCompleteCard = findViewById<CardView>(R.id.purchaseCompleteCard)
+        val ok = findViewById<TextView>(R.id.ok)
 
 
         val logo = findViewById<ImageView>(R.id.logo)
@@ -58,14 +67,20 @@ class Payment : AppCompatActivity() {
             onBackPressed()
         }
 
+        ok.setOnClickListener {
+            finish()
+            startActivity(Intent(context, MyPropertiesActivity::class.java))
+        }
+
         loadingScreen = findViewById<ConstraintLayout>(R.id.loadingScreen)
 
 
 
         PaystackSdk.initialize(context)
-        PaystackSdk.setPublicKey("pk_test_08a0aa8cb1c30848998ace5747cc8bfdee18ff16")//set proper test or live key here
+        PaystackSdk.setPublicKey("pk_live_76d9f86391f1540d099acea9142c37d8cf085fbf")//set proper test or live key here
 
-
+       // "pk_test_08a0aa8cb1c30848998ace5747cc8bfdee18ff16"
+      //  pk_live_76d9f86391f1540d099acea9142c37d8cf085fbf
         val confirmButton = findViewById<TextView>(R.id.confirmPayment)
 
         val estateName = findViewById<TextView>(R.id.propertyName)
@@ -83,6 +98,8 @@ class Payment : AppCompatActivity() {
                     totalPriceText.text = "Total Price:  ${estatePrice.toString().replace(",","")}"
                     return
                 }
+
+                totalPrice = estatePrice * Integer.parseInt(durationText.text.toString() )
 
                 totalPriceText.text =
                     "Total Price:  ${(estatePrice * Integer.parseInt(durationText.text.toString())).toString()}"
@@ -105,12 +122,11 @@ class Payment : AppCompatActivity() {
                     return@setOnClickListener
                 }
 
-                Log.d("PAYMENT-PAGE", "Confirm button clicked - 1")
+                Log.d("PAYMENT-PAGE", "Confirm button clicked - 1 ${estateFromRepository.price.toInt()}")
 
                 loadingScreen.isVisible = true
 
-
-                performCharge(estatePrice)
+                performCharge(totalPrice)
             }
 
 
@@ -146,8 +162,8 @@ class Payment : AppCompatActivity() {
 
         //call this method if you set a plan
         //charge.setPlan("PLN_yourplan");
-        charge.setEmail("mytestemail@test.com") //dummy email address //set proper email address
-        charge.setAmount(amount) //test amount
+        charge.setEmail("ekwunotessy@gmail.com") //dummy email address //set proper email address
+        charge.setAmount(amount  * 100) //test amount
         PaystackSdk.chargeCard(context as Activity?, charge, object : Paystack.TransactionCallback {
             override fun onSuccess(transaction: Transaction) {
 
@@ -215,6 +231,16 @@ class Payment : AppCompatActivity() {
                                             Log.d("ACTIVITY","FINALIZED")
                                             loadingScreen.isVisible = false
                                             Toast.makeText(context,"Payment successful", Toast.LENGTH_SHORT).show()
+                                            purchaseCompleteCard.isVisible = true
+                                            purchased = true
+
+
+
+                                            val price = amount  - ((amount*5)/100)
+
+
+                                            userDatabase.updateWallet(estateFromRepository.adminId!!, price)
+
                                             //save to client side
 
                                             //success dialog
@@ -245,5 +271,16 @@ class Payment : AppCompatActivity() {
         })
     }
 
+
+    override fun onBackPressed() {
+
+
+        if(!purchased){
+        super.onBackPressed()}else{
+            startActivity(Intent(context, MyPropertiesActivity::class.java))
+        }
+
+
+    }
 
 }

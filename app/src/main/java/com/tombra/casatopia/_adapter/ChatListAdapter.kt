@@ -1,6 +1,7 @@
 package com.tombra.casatopia._adapter
 
 import android.content.Context
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isVisible
@@ -35,8 +36,13 @@ class ChatListAdapter(val callback: (Int)->Unit) :
         with(holder) {
             with(getItem(position)) {
 
+
+
                 binding.bubbleCard.isVisible = false
                 binding.bubbleText.text = ""
+                binding.name.text = ""
+                binding.image.setBackgroundColor(Color.BLACK)
+
 
                 userDatabase.listenForSingleUnread(adminId) {data1, data2 ->
                     if (data2 > 0) {

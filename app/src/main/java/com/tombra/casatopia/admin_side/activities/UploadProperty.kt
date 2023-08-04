@@ -412,8 +412,19 @@ class UploadProperty : AppCompatActivity(), OnMapReadyCallback {
         val latLng = LatLng(currentLocation!!.latitude, currentLocation!!.longitude)
         val markerOptions = MarkerOptions().position(latLng).title("Property here")
         googleMap?.animateCamera(CameraUpdateFactory.newLatLng(latLng))
-        googleMap?.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 19.0f))
+        googleMap?.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 16.0f))
         googleMap?.addMarker(markerOptions)
+
+
+        googleMap.setOnMapClickListener {
+            googleMap.clear()
+            googleMap.addMarker(MarkerOptions().position(it))
+            currentLocation!!.latitude = it.latitude
+            currentLocation!!.longitude = it.longitude
+        }
+
+
+
     }
 
 

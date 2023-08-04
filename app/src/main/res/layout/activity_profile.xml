@@ -82,17 +82,18 @@
                 android:layout_width="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_height="wrap_content">
+
                 <androidx.appcompat.widget.AppCompatButton
 
-                    android:layout_width="wrap_content"
                     android:id="@+id/startConversation"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:background="#00bbff"
                     android:text="Chat"
-                    android:visibility="gone"
                     android:textColor="#ffffff"
-                    android:textStyle="bold"
                     android:textSize="17dp"
-                    android:layout_height="wrap_content"/>
+                    android:textStyle="bold"
+                    android:visibility="gone" />
 
 
             </androidx.cardview.widget.CardView>
@@ -117,6 +118,29 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_height="wrap_content"/>
 
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:text=""
+                android:textColor="#444444"
+                android:id="@+id/email"
+                android:textSize="18dp"
+                android:layout_marginTop="-10dp"
+                android:gravity="center"
+                android:layout_gravity="center_horizontal"
+                android:layout_height="wrap_content"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:text=""
+                android:textColor="#444444"
+                android:id="@+id/phoneNumber"
+                android:textSize="15dp"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:layout_gravity="center_horizontal"
+                android:layout_height="wrap_content"/>
+
+
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
@@ -137,6 +161,14 @@
                     android:layout_weight="1"
                     android:text="Log out"
                     android:id="@+id/logout1"
+                    android:gravity="center"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1.2"
+                    android:text="Maintenance"
+                    android:id="@+id/maintenance"
                     android:gravity="center"
                     android:layout_height="wrap_content"/>
 

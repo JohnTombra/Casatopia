@@ -48,6 +48,8 @@ class AdminProfile : AppCompatActivity() {
 
                 adminName.text = "${admin.firstName} ${admin.lastName}"
 
+                findViewById<TextView>(R.id.email).text = admin.email
+                findViewById<TextView>(R.id.phoneNumber).text = admin.phoneNumber
 
                 Glide.with(context).load(admin.imageLink)
                     .fitCenter()

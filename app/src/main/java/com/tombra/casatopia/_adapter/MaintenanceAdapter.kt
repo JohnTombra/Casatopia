@@ -10,15 +10,16 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.tombra.casatopia.R
+import com.tombra.casatopia._model.Maintenance
 import com.tombra.casatopia._model.Transaction
+import com.tombra.casatopia.databinding.MaintenanceBinding
 import com.tombra.casatopia.databinding.PropertiesBinding
 import com.tombra.casatopia.user_side.activities.MyProperty
 import com.tombra.casatopia.user_side.activities.UserPropertyDetails
 import com.tombra.casatopia.user_side.data.UserDatabase
 
-class MyPropertiesAdapter :
-    ListAdapter<Transaction, MyPropertiesAdapter.ChatViewHolder>(DiffCallBack()) {
-
+class MaintenanceAdapter :
+    ListAdapter<Maintenance, MaintenanceAdapter.ChatViewHolder>(DiffCallBack()) {
 
 
     lateinit var context: Context
@@ -27,70 +28,60 @@ class MyPropertiesAdapter :
         context = viewGroup.context
         userDatabase = UserDatabase(context)
         val inflater = LayoutInflater.from(context)
-        val binding = PropertiesBinding.inflate(inflater, viewGroup, false)
+        val binding = MaintenanceBinding.inflate(inflater, viewGroup, false)
         return ChatViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ChatViewHolder, position: Int) {
 
 
-
-
         with(holder) {
             with(getItem(position)) {
 
                 binding.image.setBackgroundColor(Color.BLACK)
-                binding.name.text = ""
-                binding.duration.text = ""
-                binding.amountPaid.text = ""
-                binding.location.text = ""
-                binding.layout.setOnClickListener {  }
+                binding.message.text = ""
 
 
 
 
-                userDatabase.getSingleEstate(estateId){ estate ->
-
-                    binding.name.text = estate.estateName
-
-
-                    binding.duration.text = "Duration: ${estate.purchase!!.duration} years"
-
-                    binding.amountPaid.text = "Payment: ₦ ${estate.price!!.replace("₦","").replace(",","").toInt() * estate.purchase!!.duration.toInt()}"
-
-                    binding.location.text = "${estate.country}, ${estate.state}, ${estate.city}"
-
-                    binding.layout.setOnClickListener {
-                        context.startActivity(Intent(context, MyProperty::class.java).putExtra("estateId",estate.estateId))
+                userDatabase.getSingleEstate(estate) { estate ->
+                    binding.acknowledged.text = if (acknowledged) {
+                        binding.acknowledged.setBackgroundColor(Color.rgb(75, 175, 80))
+                        "Acknowledged"
+                    } else {
+                   //     binding.acknowledged.setBackgroundColor(Color.LTGRAY)
+                        "Not Acknowledged"
                     }
-
+                    binding.message.text = message
                     Glide.with(context).load(estate.image1)
                         .fitCenter()
                         .centerCrop()
                         .into(binding.image)
 
                 }
+
+
             }
         }
     }
 
 
-    class DiffCallBack() : DiffUtil.ItemCallback<Transaction>() {
-        override fun areItemsTheSame(oldItem: Transaction, newItem: Transaction) =
-            oldItem.transactionId == newItem.transactionId
+    class DiffCallBack() : DiffUtil.ItemCallback<Maintenance>() {
+        override fun areItemsTheSame(oldItem: Maintenance, newItem: Maintenance) =
+            oldItem.timestamp == newItem.timestamp
 
-        override fun areContentsTheSame(oldItem: Transaction, newItem: Transaction) =
+        override fun areContentsTheSame(oldItem: Maintenance, newItem: Maintenance) =
             oldItem == newItem
     }
 
-    inner class ChatViewHolder(val binding: PropertiesBinding) : RecyclerView.ViewHolder(binding.root){
+    inner class ChatViewHolder(val binding: MaintenanceBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
 
-        init{
+        init {
             binding.root.setOnClickListener {
                 val position: Int = adapterPosition
-                if (position != RecyclerView.NO_POSITION){
-
+                if (position != RecyclerView.NO_POSITION) {
 
 
                     //set on click liestener here

@@ -31,6 +31,11 @@ class NotificationAdapter :
 
         with(holder) {
             with(getItem(position)) {
+
+                binding.title.text = ""
+                binding.message.text = ""
+                
+
                 binding.title.text = title
                 binding.message.text = message
             }

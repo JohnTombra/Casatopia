@@ -2,6 +2,7 @@ package com.tombra.casatopia._adapter
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -40,6 +41,12 @@ class TransactionAdapter(val callback: (Int)-> Unit) :
         with(holder) {
             with(getItem(position)) {
 
+                binding.image.setBackgroundColor(Color.BLACK)
+                binding.name.text =""
+                binding.location.text = ""
+                binding.amountPaid.text = ""
+                binding.duration.text = ""
+                binding.layout.setOnClickListener {  }
 
 
                 userDatabase.getSingleEstate(estateId){ estate ->
